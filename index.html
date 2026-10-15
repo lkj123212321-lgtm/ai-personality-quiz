@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="25題 AI 人格心理測驗 — 探索你最接近哪一位 AI 夥伴。">
+  <meta name="description" content="25 題 AI 人格心理測驗 — 探索你最接近哪一位 AI 夥伴。">
   <meta name="theme-color" content="#020617">
   <title>你是哪一位 AI 夥伴？ — AI 人格測驗</title>
   <style>
@@ -24,41 +24,62 @@
     .meta{color:var(--muted);font-size:0.9rem;margin-top:8px}
     .frame{width:100%;height:640px;border-radius:10px;border:0}
     footer{margin-top:20px;color:var(--muted);font-size:0.9rem}
+    .share-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
+    .skip-link{position:absolute;left:8px;top:8px;background:#fff;color:#000;padding:6px 10px;border-radius:6px;transform:translateY(-120%);transition:transform .18s}
+    .skip-link:focus{transform:translateY(0)}
     @media (max-width:880px){.hero{grid-template-columns:1fr;}.frame{height:520px}}
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#quiz-embed">跳過導覽，直接前往測驗</a>
   <div class="container">
     <header>
       <div class="logo" aria-hidden>🤖</div>
       <div>
-        <h1>你是哪一位 AI 夥伴？</h1>
+        <h1 id="site-title">你是哪一位 AI 夥伴？</h1>
         <p class="lead">25 題 AI 人格心理測驗 — 探索你最接近哪一位 AI 夥伴，並取得結果說明與分享連結。</p>
       </div>
     </header>
 
-    <main class="hero">
-      <section class="card">
+    <main class="hero" id="main" role="main" aria-labelledby="site-title">
+      <section class="card" aria-describedby="howto">
         <h2>如何使用</h2>
-        <p class="meta">點擊「開始測驗」後，將在右側載入完整測驗。若希望獨立頁面也可開啟新分頁。</p>
+        <p id="howto" class="meta">點擊「開始測驗」或在右側直接操作。若希望獨立頁面也可開啟新分頁。測驗在無障礙模式下支援鍵盤操作，並提供結果分享按鈕。</p>
         <div style="margin-top:14px" class="cta">
-          <a class="btn" href="/ai-personality-quiz-standalone.html" target="_blank" rel="noopener noreferrer">在新分頁開啟測驗</a>
+          <a class="btn" href="/ai-personality-quiz-standalone.html" target="_blank" rel="noopener noreferrer" id="open-new">在新分頁開啟測驗</a>
           <a class="btn secondary" href="#quiz-embed">在此頁嵌入測驗</a>
         </div>
 
-        <h3 style="margin-top:18px">功能建議（我可以幫你實作）</h3>
-        <ul style="color:var(--muted);margin:8px 0 0 20px">
-          <li>分離 CSS / JavaScript 檔案以利維護與快取。</li>
-          <li>改善無障礙（鍵盤操作、ARIA 標籤、語義化 HTML）。</li>
-          <li>加入社群分享按鈕與微互動動畫。</li>
-          <li>加入 GitHub Pages 設定以快速上線（下方說明）。</li>
-        </ul>
+        <h3 style="margin-top:18px">快速分享</h3>
+        <div class="share-row" role="region" aria-label="分享此測驗">
+          <button class="btn" id="share-web" aria-label="分享測驗連結">分享測驗</button>
+          <button class="btn secondary" id="copy-link" aria-label="複製測驗連結">複製連結</button>
+        </div>
+
+        <div style="margin-top:14px">
+          <h3>功能建議（我可以幫你實作）</h3>
+          <ul style="color:var(--muted);margin:8px 0 0 20px">
+            <li>分離 CSS / JavaScript 檔案以利維護與快取。</li>
+            <li>進一步強化無障礙 (ARIA 標註、鍵盤焦點管理、語音輔助支援)。</li>
+            <li>加入社群分享按鈕與微互動動畫（已加入基本分享）。</li>
+            <li>加入 GitHub Pages 設定以快速上線（下方說明）。</li>
+          </ul>
+        </div>
       </section>
 
-      <aside id="quiz-embed" class="card">
+      <aside id="quiz-embed" class="card" aria-live="polite">
         <h2>測驗預覽</h2>
         <p class="meta">若頁面無法顯示，請點選上方按鈕在新分頁開啟完整測驗。</p>
-        <iframe class="frame" src="/ai-personality-quiz-standalone.html" title="AI 人格測驗（嵌入）"></iframe>
+        <iframe class="frame" src="/ai-personality-quiz-standalone.html" title="AI 人格測驗（嵌入）" id="quiz-frame" aria-label="AI 人格測驗嵌入視窗"></iframe>
+
+        <div class="meta" style="margin-top:12px">完成測驗後，請使用內頁的「分享結果」或下方的分享按鈕快速分享。</div>
+        <div class="share-row" style="margin-top:10px">
+          <button class="btn" id="share-twitter" aria-label="以 Twitter 分享結果">分享到 Twitter</button>
+          <button class="btn" id="share-line" aria-label="以 LINE 分享結果">分享到 LINE</button>
+          <button class="btn secondary" id="share-copy-result" aria-label="複製結果連結">複製結果連結</button>
+        </div>
+
       </aside>
     </main>
 
@@ -66,5 +87,106 @@
       <p>此網站由 GitHub 倉庫 <a href="https://github.com/lkj123212321-lgtm/ai-personality-quiz">lkj123212321-lgtm/ai-personality-quiz</a> 提供。要把它部署為 GitHub Pages：前往倉庫 Settings → Pages，選擇分支（例如 main）並儲存，然後等待網址生成（通常為 https://lkj123212321-lgtm.github.io/ai-personality-quiz/）。</p>
     </footer>
   </div>
+
+  <script>
+    // Accessibility helpers
+    (function(){
+      const openNew = document.getElementById('open-new');
+      const quizFrame = document.getElementById('quiz-frame');
+      const shareWeb = document.getElementById('share-web');
+      const copyLink = document.getElementById('copy-link');
+      const shareTwitter = document.getElementById('share-twitter');
+      const shareLine = document.getElementById('share-line');
+      const shareCopyResult = document.getElementById('share-copy-result');
+
+      const quizUrl = new URL(window.location.href);
+      quizUrl.pathname = '/ai-personality-quiz-standalone.html';
+      const QUIZ_URL = quizUrl.toString();
+
+      function copyToClipboard(text){
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          return navigator.clipboard.writeText(text);
+        }
+        // fallback
+        const t = document.createElement('textarea');
+        t.value = text; t.style.position='fixed'; t.style.left='-9999px';
+        document.body.appendChild(t); t.select();
+        try{document.execCommand('copy');}catch(e){}
+        document.body.removeChild(t);
+        return Promise.resolve();
+      }
+
+      shareWeb.addEventListener('click', async ()=>{
+        const shareData = {title:document.title, text:'來做這個有趣的 AI 人格測驗：', url: QUIZ_URL};
+        if(navigator.share){
+          try{ await navigator.share(shareData); }catch(e){}
+        }else{
+          // open fallback dialog: copy link
+          await copyToClipboard(QUIZ_URL);
+          alert('已複製連結，可貼到社群分享（因裝置不支援 Web Share API）');
+        }
+      });
+
+      copyLink.addEventListener('click', ()=>{
+        copyToClipboard(QUIZ_URL).then(()=>{
+          const btn = copyLink; btn.innerText='已複製'; setTimeout(()=>btn.innerText='複製連結',1500);
+        });
+      });
+
+      // Share result helpers: try to retrieve result via postMessage from iframe
+      // The standalone app does not currently post results; we'll attempt to request it.
+      function requestResultFromIframe(){
+        return new Promise((resolve)=>{
+          const onMessage = (ev)=>{
+            if(ev.source!==quizFrame.contentWindow) return;
+            if(ev.data && ev.data.type === 'ai-quiz-result'){
+              window.removeEventListener('message', onMessage);
+              resolve(ev.data.payload);
+            }
+          };
+          window.addEventListener('message', onMessage);
+          // ask iframe to send result (if it supports messaging)
+          try{ quizFrame.contentWindow.postMessage({type:'request-result'}, '*'); }catch(e){/*ignore*/}
+          // fallback timeout
+          setTimeout(()=>{ window.removeEventListener('message', onMessage); resolve(null); }, 800);
+        });
+      }
+
+      shareTwitter.addEventListener('click', async ()=>{
+        const result = await requestResultFromIframe();
+        const text = result ? `我做了「${result.title}」測驗，結果是 ${result.name} — ${result.summary}` : '我做了這個 AI 人格測驗，來試試看！';
+        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(QUIZ_URL)}`;
+        window.open(url,'_blank','noopener');
+      });
+
+      shareLine.addEventListener('click', async ()=>{
+        const result = await requestResultFromIframe();
+        const text = result ? `我做了「${result.title}」測驗，結果是 ${result.name}：${result.summary} ${QUIZ_URL}` : `來做這個 AI 人格測驗： ${QUIZ_URL}`;
+        const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(QUIZ_URL)}&text=${encodeURIComponent(text)}`;
+        window.open(url,'_blank','noopener');
+      });
+
+      shareCopyResult.addEventListener('click', async ()=>{
+        const result = await requestResultFromIframe();
+        const text = result ? `我的測驗結果：${result.title} — ${result.name}\n${result.summary}\n${QUIZ_URL}` : QUIZ_URL;
+        await copyToClipboard(text);
+        const btn = shareCopyResult; btn.innerText='已複製'; setTimeout(()=>btn.innerText='複製結果連結',1500);
+      });
+
+      // Focus management: when clicking "在此頁嵌入測驗" move focus to iframe
+      document.querySelectorAll('a[href="#quiz-embed"]').forEach(a=>{
+        a.addEventListener('click',(e)=>{ e.preventDefault(); const frame = document.getElementById('quiz-frame'); frame.focus(); });
+      });
+
+      // Make iframe focusable
+      quizFrame.setAttribute('tabindex','0');
+
+      // Announce when iframe loads
+      quizFrame.addEventListener('load',()=>{
+        quizFrame.setAttribute('title','AI 人格測驗（已載入）');
+      });
+
+    })();
+  </script>
 </body>
 </html>
