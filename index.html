@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="25題AI人格心理測驗，探索你最接近哪一位AI夥伴。">
+<meta name="theme-color" content="#020617">
+<title>你是哪一位 AI 夥伴？</title>
+<style>
+:root{font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;color-scheme:dark;background:#020617;--cyan:#22d3ee;--muted:#94a3b8}*{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh;background:#020617;color:#fff}.screen{min-height:100vh;padding:20px}.center{display:grid;place-items:center;background:radial-gradient(circle at top,#172554,#020617 58%)}.card{width:min(900px,100%);border:1px solid #ffffff1a;background:#ffffff0d;border-radius:28px;box-shadow:0 24px 70px #0008;overflow:hidden}.pad{padding:34px}.hero{text-align:center}.robot{font-size:72px}.eyebrow{color:#67e8f9;font-weight:800;letter-spacing:.16em}.hero h1{font-size:clamp(2.3rem,7vw,4rem);margin:10px 0}.sub{color:#cbd5e1;line-height:1.7;font-size:1.08rem;max-width:680px;margin:auto}.types{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:30px 0}.type-chip{padding:13px 6px;background:#ffffff0d;border-radius:16px;font-size:.75rem;color:#94a3b8}.type-chip b{display:block;font-size:1.8rem;margin-bottom:4px}.btn{border:0;border-radius:13px;padding:13px 20px;font-weight:800;font-size:1rem;cursor:pointer;background:#22d3ee;color:#082f49;transition:.2s}.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}.btn:disabled{opacity:.35;cursor:not-allowed;transform:none}.btn.alt{background:transparent;color:#fff;border:1px solid #ffffff33}.note{font-size:.78rem;color:#64748b;margin-top:18px}.wrap{width:min(780px,100%);margin:auto}.topline,.nav{display:flex;justify-content:space-between;align-items:center;gap:12px}.topline{font-size:.9rem;color:#94a3b8;margin-bottom:12px}.progress{height:8px;background:#ffffff1a;border-radius:100px;overflow:hidden;margin-bottom:28px}.bar{height:100%;background:linear-gradient(90deg,#22d3ee,#8b5cf6);transition:width .25s}.question{padding:28px}.qnum{color:#67e8f9;font-weight:800}.question h2{font-size:clamp(1.45rem,4vw,2rem);line-height:1.4;margin:14px 0 24px}.options{display:grid;gap:11px}.option{width:100%;display:flex;align-items:center;gap:13px;text-align:left;padding:15px;border-radius:16px;border:1px solid #ffffff1a;background:#ffffff0d;color:#fff;font-size:1rem;cursor:pointer;transition:.18s}.option:hover{background:#ffffff17;border-color:#ffffff55}.option.selected{border-color:#22d3ee;background:#22d3ee22}.letter{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#ffffff13;font-weight:900;flex:0 0 auto}.tick{margin-left:auto;color:#67e8f9}.nav{margin-top:18px}.result-head{text-align:center;padding:45px 28px;background:linear-gradient(135deg,#10b981,#0891b2)}.result-head .icon{font-size:70px}.result-head h1{font-size:clamp(2rem,6vw,3.2rem);margin:8px}.result-head h2{margin:0;font-size:clamp(1.25rem,4vw,1.8rem)}.desc{font-size:1.08rem;line-height:1.75;color:#e2e8f0}.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}.info{background:#ffffff0d;border-radius:16px;padding:18px}.info b{display:block;color:#67e8f9;font-size:.85rem;margin-bottom:8px}.score-row{margin:15px 0}.score-label{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:6px}.track{height:11px;background:#ffffff18;border-radius:100px;overflow:hidden}.fill{height:100%;border-radius:100px;background:linear-gradient(90deg,#22d3ee,#8b5cf6)}@media(max-width:680px){.types{grid-template-columns:repeat(3,1fr)}.pad,.question{padding:22px}.info-grid{grid-template-columns:1fr}.option{padding:13px}.screen{padding:14px}}
+
+/* 活力版視覺系統 */
+body{background:
+ radial-gradient(circle at 8% 5%,#22d3ee30,transparent 28%),
+ radial-gradient(circle at 92% 18%,#f472b630,transparent 30%),
+ radial-gradient(circle at 48% 100%,#a3e63520,transparent 34%),#080b25;background-attachment:fixed}
+.screen{position:relative;isolation:isolate;overflow:hidden}
+.screen:before,.screen:after{content:"";position:fixed;border-radius:999px;filter:blur(4px);opacity:.28;z-index:-1;animation:floaty 8s ease-in-out infinite}
+.screen:before{width:190px;height:190px;left:-55px;top:18%;background:linear-gradient(135deg,#22d3ee,#8b5cf6)}
+.screen:after{width:240px;height:240px;right:-80px;bottom:5%;background:linear-gradient(135deg,#fb7185,#facc15);animation-delay:-3s}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-28px) rotate(12deg)}}
+@keyframes pop{0%{transform:scale(.96);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes shimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.card{background:linear-gradient(145deg,#ffffff17,#ffffff09);border-color:#ffffff2b;backdrop-filter:blur(18px);box-shadow:0 26px 85px #020617aa,0 0 0 1px #ffffff08 inset;animation:pop .36s ease-out}
+.center{background:transparent}
+.hero{position:relative}
+.hero:before{content:"AI QUEST";display:inline-flex;padding:7px 13px;border-radius:999px;background:linear-gradient(90deg,#facc15,#fb7185);color:#30123b;font-weight:1000;font-size:.72rem;letter-spacing:.18em;margin-bottom:8px;box-shadow:0 8px 25px #fb718555}
+.robot{display:inline-grid;place-items:center;width:110px;height:110px;border-radius:32px;background:linear-gradient(135deg,#22d3ee,#8b5cf6,#f472b6);background-size:200% 200%;animation:shimmer 5s ease infinite;box-shadow:0 18px 50px #8b5cf655;transform:rotate(-3deg)}
+.eyebrow{color:#fde68a}.hero h1{background:linear-gradient(90deg,#67e8f9,#c4b5fd,#f9a8d4,#fde68a);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 6s linear infinite;text-shadow:0 0 32px #a78bfa22}
+.types{gap:13px}.type-chip{position:relative;overflow:hidden;border:1px solid #ffffff23;color:#fff;font-weight:800;transition:.25s;box-shadow:0 10px 24px #0003}.type-chip:hover{transform:translateY(-7px) rotate(-1deg);box-shadow:0 18px 35px #0005}.type-chip:nth-child(1){background:linear-gradient(145deg,#10b98155,#14b8a633)}.type-chip:nth-child(2){background:linear-gradient(145deg,#3b82f655,#6366f133)}.type-chip:nth-child(3){background:linear-gradient(145deg,#f59e0b55,#f9731633)}.type-chip:nth-child(4){background:linear-gradient(145deg,#8b5cf655,#ec489933)}.type-chip:nth-child(5){background:linear-gradient(145deg,#06b6d455,#0ea5e933)}.type-chip:nth-child(6){background:linear-gradient(145deg,#64748b66,#33415544)}
+.btn{background:linear-gradient(90deg,#22d3ee,#a3e635);box-shadow:0 10px 30px #22d3ee44;color:#06202d}.btn:hover{box-shadow:0 14px 36px #a3e63555}.btn.alt{background:#ffffff0d;box-shadow:none}.progress{height:12px;border:1px solid #ffffff16}.bar{background:linear-gradient(90deg,#22d3ee,#8b5cf6,#f472b6,#facc15);background-size:200% 100%;animation:shimmer 3s linear infinite}
+.question{border-top:5px solid transparent;border-image:linear-gradient(90deg,#22d3ee,#8b5cf6,#f472b6,#facc15) 1}.qnum{display:inline-flex;padding:7px 12px;border-radius:999px;background:#22d3ee1c;border:1px solid #67e8f955}.option{position:relative;overflow:hidden;background:linear-gradient(120deg,#ffffff0d,#ffffff08);border-width:2px}.option:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,#ffffff12,transparent);transform:translateX(-100%);transition:.5s}.option:hover:before{transform:translateX(100%)}.option:nth-child(1) .letter{background:#10b98155;color:#a7f3d0}.option:nth-child(2) .letter{background:#3b82f655;color:#bfdbfe}.option:nth-child(3) .letter{background:#f59e0b55;color:#fde68a}.option:nth-child(4) .letter{background:#8b5cf655;color:#ddd6fe}.option:nth-child(5) .letter{background:#06b6d455;color:#a5f3fc}.option:nth-child(6) .letter{background:#64748b66;color:#e2e8f0}.option.selected{background:linear-gradient(90deg,#22d3ee26,#8b5cf626,#f472b61c);box-shadow:0 0 0 1px #67e8f9 inset,0 10px 28px #22d3ee25;transform:translateX(5px)}
+.result-head{position:relative;background:linear-gradient(115deg,#06b6d4,#8b5cf6,#ec4899,#f59e0b);background-size:250% 250%;animation:shimmer 7s ease infinite}.result-head:after{content:"✦  PERSONALITY UNLOCKED  ✦";display:block;margin-top:18px;font-size:.7rem;letter-spacing:.18em;font-weight:900;opacity:.8}.result-head .icon{filter:drop-shadow(0 12px 20px #0005);animation:floaty 4s ease-in-out infinite}.info{border:1px solid #ffffff18;transition:.2s}.info:hover{transform:translateY(-4px);background:#ffffff14}.track{height:14px}.fill{background:linear-gradient(90deg,#22d3ee,#8b5cf6,#f472b6);box-shadow:0 0 14px #8b5cf677}
+@media(max-width:680px){.robot{width:90px;height:90px}.type-chip{min-height:88px}.nav .btn{padding:11px 14px;font-size:.9rem}}
+
+
+/* 六位 AI 角色介紹 */
+.intro-title{margin:35px 0 8px;font-size:1.55rem}.intro-sub{color:#cbd5e1;margin:0 0 18px}.character-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:20px 0 30px;text-align:left}.character-card{position:relative;min-height:310px;border-radius:24px;overflow:hidden;border:1px solid #ffffff25;background:linear-gradient(160deg,var(--c1),var(--c2));box-shadow:0 18px 36px #0005;transition:.28s}.character-card:hover{transform:translateY(-8px) rotate(-.4deg);box-shadow:0 25px 48px #0007}.character-art{height:168px;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 70%,#ffffff33,transparent 60%)}.character-art img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 14px 18px #0006);transition:.3s}.character-card:hover .character-art img{transform:scale(1.07) rotate(1deg)}.css-mascot{width:112px;height:112px;border-radius:36px;display:grid;place-items:center;font-size:64px;background:linear-gradient(145deg,#ffffffdd,#ffffff66);box-shadow:0 14px 35px #0005,0 0 0 7px #ffffff24;transform:rotate(-4deg)}.character-copy{padding:17px}.character-name{font-size:1.13rem;font-weight:1000}.character-role{font-size:.86rem;color:#fff;opacity:.83;margin:3px 0 10px}.character-tags{display:flex;flex-wrap:wrap;gap:6px}.tag{font-size:.7rem;font-weight:900;padding:5px 8px;border-radius:999px;background:#02061755;border:1px solid #ffffff22}.character-quote{font-size:.82rem;line-height:1.5;color:#f8fafc;margin:11px 0 0}.meet-badge{position:absolute;right:10px;top:10px;border-radius:999px;background:#020617aa;color:#fff;padding:5px 8px;font-size:.65rem;font-weight:900;letter-spacing:.08em}.result-character{width:min(300px,80%);height:250px;object-fit:contain;filter:drop-shadow(0 18px 25px #0007);margin:-30px auto 5px;display:block}.result-mascot{width:150px;height:150px;margin:-5px auto 18px;border-radius:48px;font-size:86px;display:grid;place-items:center;background:#ffffffcc;box-shadow:0 18px 35px #0005}.ai-profile{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}.profile-box{padding:18px;border-radius:18px;background:#ffffff0c;border:1px solid #ffffff18}.profile-box b{color:#fde68a;display:block;margin-bottom:7px}.choose-note{margin:20px 0 0;padding:13px;border-radius:14px;background:#02061755;color:#dbeafe;font-size:.83rem}
+@media(max-width:800px){.character-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.character-grid{grid-template-columns:1fr}.character-card{min-height:280px}.ai-profile{grid-template-columns:1fr}}
+
+
+/* 亮色 AI 圖標背景 */
+:root{--page-bg:#f7fbff;--ink:#172554;--soft-ink:#475569}
+body{color:var(--ink);background:
+ radial-gradient(circle at 8% 8%,#67e8f966,transparent 24%),
+ radial-gradient(circle at 88% 12%,#f9a8d466,transparent 25%),
+ radial-gradient(circle at 78% 90%,#fde04755,transparent 28%),
+ radial-gradient(circle at 15% 85%,#a7f3d055,transparent 26%),
+ linear-gradient(135deg,#fff7ed 0%,#f0f9ff 30%,#faf5ff 68%,#f0fdf4 100%);background-attachment:fixed}
+.screen{color:var(--ink)}
+.center{background:transparent}
+.screen:before,.screen:after{display:none}
+.ai-icon-field{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
+.ai-bg-icon{position:absolute;display:grid;place-items:center;width:68px;height:68px;border-radius:22px;font-size:35px;border:2px solid #ffffffcc;box-shadow:0 14px 35px #64748b25,0 0 0 5px #ffffff55 inset;opacity:.72;animation:iconFloat var(--speed) ease-in-out infinite;transform:rotate(var(--rotate));backdrop-filter:blur(4px)}
+.ai-bg-icon:nth-child(1){left:3%;top:8%;background:#5eead4}.ai-bg-icon:nth-child(2){left:84%;top:7%;background:#93c5fd}.ai-bg-icon:nth-child(3){left:52%;top:3%;background:#fde68a}.ai-bg-icon:nth-child(4){left:7%;top:43%;background:#c4b5fd}.ai-bg-icon:nth-child(5){left:89%;top:42%;background:#67e8f9}.ai-bg-icon:nth-child(6){left:4%;top:78%;background:#fda4af}.ai-bg-icon:nth-child(7){left:72%;top:78%;background:#bef264}.ai-bg-icon:nth-child(8){left:91%;top:82%;background:#f9a8d4}.ai-bg-icon:nth-child(9){left:31%;top:88%;background:#fcd34d}.ai-bg-icon:nth-child(10){left:32%;top:14%;background:#a5b4fc}
+@keyframes iconFloat{0%,100%{translate:0 0;rotate:var(--rotate)}50%{translate:0 -24px;rotate:calc(var(--rotate) + 10deg)}}
+.card{background:#ffffffd9;border-color:#ffffff;box-shadow:0 25px 70px #64748b2f,0 0 0 1px #cbd5e166 inset;color:var(--ink)}
+.hero:before{color:#701a75}.eyebrow{color:#7c3aed}.sub,.intro-sub{color:var(--soft-ink)}
+.hero h1{background:linear-gradient(90deg,#0891b2,#7c3aed,#db2777,#ea580c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.type-chip{color:#172554;border-color:#ffffffdd;box-shadow:0 12px 24px #64748b22}.type-chip:nth-child(1){background:linear-gradient(145deg,#6ee7b7,#ccfbf1)}.type-chip:nth-child(2){background:linear-gradient(145deg,#93c5fd,#c7d2fe)}.type-chip:nth-child(3){background:linear-gradient(145deg,#fde68a,#fed7aa)}.type-chip:nth-child(4){background:linear-gradient(145deg,#c4b5fd,#fbcfe8)}.type-chip:nth-child(5){background:linear-gradient(145deg,#67e8f9,#bae6fd)}.type-chip:nth-child(6){background:linear-gradient(145deg,#cbd5e1,#e2e8f0)}
+.question{background:#ffffffeb}.question h2{color:#172554}.topline{color:#475569}.progress{background:#e2e8f0;border-color:#fff}.option{color:#172554;background:#ffffffde;border-color:#cbd5e1}.option:hover{background:#f8fafc;border-color:#8b5cf6}.option.selected{color:#172554;background:linear-gradient(90deg,#cffafe,#ede9fe,#fce7f3);box-shadow:0 8px 24px #8b5cf633}.letter{color:#172554}.btn.alt{color:#4338ca;background:#ffffffcc;border-color:#818cf8}.note{color:#64748b}
+.character-card{color:#fff}.character-role,.character-quote{color:#fff}.profile-box,.info{background:#ffffffb8;color:#334155;border-color:#cbd5e1}.profile-box b,.info b{color:#7c3aed}.desc{color:#334155}.score-label{color:#334155}.track{background:#e2e8f0}
+@media(max-width:680px){.ai-bg-icon{width:48px;height:48px;border-radius:16px;font-size:25px;opacity:.52}.ai-bg-icon:nth-child(3),.ai-bg-icon:nth-child(7),.ai-bg-icon:nth-child(10){display:none}}
+
+
+/* 指定六位AI人物色彩 */
+.ai-A{--role-color:#7c3aed}.ai-B{--role-color:#ef4444}.ai-C{--role-color:#2563eb}.ai-D{--role-color:#16a34a}.ai-E{--role-color:#6b7280}.ai-F{--role-color:#eab308}
+.character-card{border:3px solid color-mix(in srgb,var(--role-color) 75%,white);box-shadow:0 18px 40px color-mix(in srgb,var(--role-color) 30%,transparent)}
+.character-card .meet-badge{background:var(--role-color);color:#fff}.character-card .tag{background:color-mix(in srgb,var(--role-color) 70%,#111827);border-color:#ffffff66}
+.character-card.ai-F .character-name,.character-card.ai-F .character-role,.character-card.ai-F .character-quote{color:#292524}.character-card.ai-F .tag{color:#1c1917;background:#fde047;border-color:#854d0e44}
+.avatar-B{filter:hue-rotate(125deg) saturate(1.55) drop-shadow(0 14px 18px #ef444466)}
+.avatar-D{filter:hue-rotate(75deg) saturate(1.4) drop-shadow(0 14px 18px #16a34a66)}
+.avatar-F{filter:hue-rotate(205deg) saturate(1.75) brightness(1.12) drop-shadow(0 14px 18px #eab30866)}
+.palette-legend{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:14px 0 26px}.palette-item{padding:9px 5px;border-radius:13px;font-size:.72rem;font-weight:1000;color:white;box-shadow:0 8px 18px #64748b22}.palette-item:nth-child(1){background:#7c3aed}.palette-item:nth-child(2){background:#ef4444}.palette-item:nth-child(3){background:#2563eb}.palette-item:nth-child(4){background:#16a34a}.palette-item:nth-child(5){background:#6b7280}.palette-item:nth-child(6){background:#eab308;color:#292524}
+@media(max-width:680px){.palette-legend{grid-template-columns:repeat(3,1fr)}}
+
+
+/* 題目頁統一配色，不顯示任何特定AI代表色 */
+:root{--quiz-primary:#2563eb;--quiz-secondary:#06b6d4;--quiz-soft:#e0f2fe;--quiz-ink:#172554}
+.question{border-top:5px solid var(--quiz-primary)!important;border-image:none!important;background:#ffffffee!important}
+.qnum{color:#1d4ed8!important;background:#dbeafe!important;border-color:#93c5fd!important}
+.progress{background:#dbeafe!important;border-color:#ffffff!important}
+.bar{background:linear-gradient(90deg,var(--quiz-primary),var(--quiz-secondary))!important;animation:none!important}
+.option,.option:nth-child(1),.option:nth-child(2),.option:nth-child(3),.option:nth-child(4),.option:nth-child(5),.option:nth-child(6){color:var(--quiz-ink)!important;background:#ffffff!important;border-color:#bfdbfe!important;box-shadow:none!important}
+.option:hover{background:#eff6ff!important;border-color:#60a5fa!important;transform:translateY(-1px)!important}
+.option.selected{color:var(--quiz-ink)!important;background:linear-gradient(90deg,#dbeafe,#cffafe)!important;border-color:var(--quiz-primary)!important;box-shadow:0 8px 24px #2563eb22!important;transform:translateX(4px)!important}
+.option .letter,.option:nth-child(1) .letter,.option:nth-child(2) .letter,.option:nth-child(3) .letter,.option:nth-child(4) .letter,.option:nth-child(5) .letter,.option:nth-child(6) .letter{color:#ffffff!important;background:var(--quiz-primary)!important}
+.option .tick{color:var(--quiz-primary)!important}
+.nav .btn:not(.alt){background:linear-gradient(90deg,var(--quiz-primary),var(--quiz-secondary))!important;color:#ffffff!important;box-shadow:0 10px 26px #2563eb33!important}
+.nav .btn.alt{color:#1d4ed8!important;background:#ffffffdd!important;border-color:#93c5fd!important}
+.topline{color:#334155!important}
+
+
+/* 研究依據區 */
+.research-notes{margin-top:32px;padding:22px;border-radius:20px;background:#f8fafc;border:1px solid #cbd5e1;color:#334155}.research-notes h2{color:#1e3a8a;margin-top:0}.research-notes p,.research-notes li{line-height:1.65}.research-notes ol{padding-left:22px;font-size:.83rem}.research-notes li{margin:8px 0}.question .options .option{min-height:58px}
+
+/* 六位AI擬人角色：服裝主色與人格象徵 */
+.character-card{--costume:#64748b;--costume-soft:#e2e8f0}
+.character-card.ai-A{--costume:#7c3aed;--costume-soft:#e9d5ff}
+.character-card.ai-B{--costume:#dc2626;--costume-soft:#fecaca}
+.character-card.ai-C{--costume:#2563eb;--costume-soft:#bfdbfe}
+.character-card.ai-D{--costume:#16a34a;--costume-soft:#bbf7d0}
+.character-card.ai-E{--costume:#6b7280;--costume-soft:#e5e7eb}
+.character-card.ai-F{--costume:#eab308;--costume-soft:#fef08a}
+.character-art{position:relative;background:radial-gradient(circle at 50% 70%,var(--costume-soft),#ffffff22 48%,transparent 72%)}
+.character-art:before{content:"";position:absolute;inset:10px;border-radius:22px;background:linear-gradient(145deg,color-mix(in srgb,var(--costume) 28%,transparent),transparent 65%);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--costume) 45%,white);pointer-events:none}
+.character-art:after{position:absolute;right:12px;bottom:9px;display:grid;place-items:center;width:48px;height:48px;border-radius:16px;background:var(--costume);color:white;font-size:24px;border:2px solid white;box-shadow:0 8px 18px #33415544}
+.ai-A .character-art:after{content:"💡"}.ai-B .character-art:after{content:"📋"}.ai-C .character-art:after{content:"📖"}.ai-D .character-art:after{content:"📷"}.ai-E .character-art:after{content:"🔎"}.ai-F .character-art:after{content:"⚙️"}
+.character-card .character-name{color:white}.character-card .character-role{color:#fff}.character-card .meet-badge{background:var(--costume)}
+/* 透過色彩校正，令服裝在卡片及結果頁跟隨指定主色 */
+.avatar-A{filter:hue-rotate(0deg) saturate(1.28) drop-shadow(0 14px 18px #7c3aed66)}
+.avatar-B{filter:hue-rotate(128deg) saturate(1.95) contrast(1.05) drop-shadow(0 14px 18px #dc262666)}
+.avatar-C{filter:hue-rotate(0deg) saturate(1.32) drop-shadow(0 14px 18px #2563eb66)}
+.avatar-D{filter:hue-rotate(74deg) saturate(1.62) drop-shadow(0 14px 18px #16a34a66)}
+.avatar-E{filter:grayscale(.82) saturate(.35) contrast(1.08) drop-shadow(0 14px 18px #6b728066)}
+.avatar-F{filter:sepia(.58) hue-rotate(352deg) saturate(2.35) brightness(1.12) drop-shadow(0 14px 18px #eab30866)}
+.role-key{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0 24px}.role-key div{padding:10px;border-radius:14px;background:#fff;color:#334155;border:2px solid var(--rk);font-size:.78rem;font-weight:900}.role-key span{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--rk);margin-right:6px}
+@media(max-width:600px){.role-key{grid-template-columns:repeat(2,1fr)}}
+
+
+/* 首頁六位角色展示修整 */
+.character-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:stretch}
+.character-card{min-height:420px;display:grid;grid-template-rows:210px 1fr;border-radius:28px;text-align:left;isolation:isolate}
+.character-art{height:210px;padding:8px 14px 0;overflow:hidden}
+.character-art img{width:100%;height:100%;object-fit:contain;object-position:center bottom;transform-origin:center bottom}
+.character-copy{display:flex;flex-direction:column;padding:19px 20px 21px;background:linear-gradient(180deg,#0f172906,#0f17296b)}
+.character-name{font-size:1.2rem;line-height:1.3;margin-bottom:5px}
+.character-role{font-size:.94rem;font-weight:800;opacity:.95;margin-bottom:13px}
+.character-details{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.character-details li{display:flex;gap:9px;align-items:flex-start;padding:9px 10px;border-radius:13px;background:#02061742;border:1px solid #ffffff20;color:#fff;font-size:.82rem;line-height:1.45}
+.character-details .detail-icon{display:grid;place-items:center;min-width:27px;height:27px;border-radius:9px;background:var(--costume);color:#fff;font-size:15px;box-shadow:0 5px 12px #0003}
+.character-details strong{display:block;font-size:.72rem;letter-spacing:.04em;opacity:.78;margin-bottom:1px}
+.character-quote{margin-top:auto;padding-top:13px;font-size:.82rem;font-weight:700;line-height:1.55;color:#fff}
+.character-card.ai-F .character-details li,.character-card.ai-F .character-quote{color:#292524;background:#fff8c7cc;border-color:#a1620730}
+.character-card.ai-F .character-details .detail-icon{color:#292524}
+.character-card.ai-F .character-copy{background:linear-gradient(180deg,#fff0,#fef3c7c7)}
+.character-card.ai-F .character-name,.character-card.ai-F .character-role{color:#292524}
+.meet-badge{z-index:4;padding:6px 10px;font-size:.68rem}
+@media(max-width:760px){.character-grid{grid-template-columns:1fr}.character-card{min-height:400px;grid-template-rows:195px 1fr}.character-art{height:195px}}
+
+
+/* 詳細人格探索結果 */
+.deep-profile{display:grid;gap:16px;margin:25px 0}.deep-section{position:relative;padding:20px 21px 20px 58px;border-radius:20px;background:linear-gradient(135deg,#ffffffd9,#f8fafccc);border:1px solid #cbd5e1;color:#334155;box-shadow:0 10px 28px #64748b18}.deep-section .deep-icon{position:absolute;left:17px;top:18px;display:grid;place-items:center;width:30px;height:30px;border-radius:10px;background:var(--section-color,#2563eb);color:white;font-size:16px}.deep-section h3{margin:0 0 8px;color:#172554;font-size:1.03rem}.deep-section p{margin:0;line-height:1.78;font-size:.96rem}.life-example{margin-top:11px!important;padding:11px 13px;border-radius:13px;background:#eff6ff;border-left:4px solid #38bdf8;color:#334155}.life-example strong{color:#0369a1}.knowledge-box{margin:20px 0;padding:20px;border-radius:20px;background:linear-gradient(135deg,#eef2ff,#ecfeff);border:1px solid #a5b4fc;color:#334155}.knowledge-box h3{margin:0 0 10px;color:#3730a3}.knowledge-box p{line-height:1.73;margin:8px 0}.knowledge-box .source-links{font-size:.84rem;color:#475569}.result-disclaimer{padding:14px 16px;border-radius:15px;background:#fff7ed;border:1px solid #fdba74;color:#7c2d12;line-height:1.6;font-size:.88rem;margin:18px 0}.research-notes li{margin-bottom:10px;line-height:1.55}.research-notes a{color:#2563eb;word-break:break-word}@media(max-width:600px){.deep-section{padding:52px 17px 18px}.deep-section .deep-icon{left:17px;top:14px}}
+
+
+/* 混合型人格結果 */
+.mixed-profile{display:grid;gap:16px;margin:24px 0}.mixed-hero{padding:21px;border-radius:21px;background:linear-gradient(135deg,#f5f3ff,#ecfeff,#fff7ed);border:1px solid #c4b5fd;color:#334155}.mixed-hero h3{margin:0 0 9px;color:#3730a3}.mixed-hero p{margin:0;line-height:1.75}.mixed-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}.mixed-role{padding:17px;border-radius:18px;background:#ffffffd9;border:2px solid var(--mix-color);color:#334155}.mixed-role h4{margin:0 0 8px;color:#172554}.mixed-role p{margin:0;line-height:1.65;font-size:.92rem}.mixed-section{padding:19px 20px;border-radius:19px;background:#ffffffd9;border:1px solid #cbd5e1;color:#334155}.mixed-section h3{margin:0 0 8px;color:#172554}.mixed-section p{margin:0;line-height:1.75}.mixed-example{margin-top:11px!important;padding:11px 13px;border-left:4px solid #8b5cf6;background:#f5f3ff;border-radius:12px}.mix-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;background:#ffffffaa;border:1px solid #c4b5fd;font-size:.78rem;font-weight:900;color:#4c1d95;margin-bottom:12px}@media(max-width:650px){.mixed-pair{grid-template-columns:1fr}}
+
+
+/* 混合型擬人化融合角色 */
+.fusion-stage{position:relative;width:min(430px,94%);height:330px;margin:-20px auto 16px;border-radius:34px;overflow:hidden;background:linear-gradient(135deg,var(--mix-a),var(--mix-b));box-shadow:0 24px 55px #0f172955,0 0 0 5px #ffffff55 inset;border:3px solid #ffffffcc}
+.fusion-stage:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 82%,#ffffff90,transparent 45%),linear-gradient(115deg,#ffffff22,transparent 38%,#ffffff30);z-index:1}
+.fusion-character{position:absolute;bottom:-9px;width:71%;height:97%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 18px 22px #0f172966);z-index:2;transition:.35s}
+.fusion-character.left{left:-8%;clip-path:polygon(0 0,78% 0,60% 100%,0 100%)}
+.fusion-character.right{right:-8%;clip-path:polygon(25% 0,100% 0,100% 100%,8% 100%)}
+.fusion-stage:hover .fusion-character.left{transform:translateX(7px) scale(1.025)}.fusion-stage:hover .fusion-character.right{transform:translateX(-7px) scale(1.025)}
+.fusion-core{position:absolute;left:50%;top:48%;translate:-50% -50%;z-index:4;width:82px;height:82px;border-radius:25px;display:grid;place-items:center;background:linear-gradient(135deg,var(--mix-a),var(--mix-b));border:4px solid white;box-shadow:0 13px 28px #0f172955;color:#fff;font-size:37px;rotate:45deg}.fusion-core span{rotate:-45deg}
+.fusion-ribbon{position:absolute;left:50%;bottom:13px;translate:-50% 0;z-index:5;min-width:72%;padding:8px 15px;border-radius:999px;background:#ffffffdd;color:#172554;font-size:.8rem;font-weight:1000;text-align:center;box-shadow:0 8px 22px #0f172933}
+.fusion-costume{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:10px 0 0}.fusion-costume span{padding:6px 10px;border-radius:999px;background:#ffffffc7;border:1px solid #ffffff;color:#334155;font-size:.76rem;font-weight:900}
+.mixed-hero h3{font-size:1.5rem;background:linear-gradient(90deg,var(--mix-a),var(--mix-b));-webkit-background-clip:text;background-clip:text;color:transparent}.mixed-hero .mix-tagline{margin-top:8px;font-weight:800;color:#4c1d95}
+@media(max-width:600px){.fusion-stage{height:285px}.fusion-character{width:76%}.fusion-core{width:68px;height:68px;font-size:30px}.fusion-ribbon{font-size:.72rem;min-width:82%}}
+
+
+/* 角色色彩與服飾元素一對一對應 */
+:root{--chatgpt:#7c3aed;--copilot:#dc2626;--claude:#2563eb;--gemini:#16a34a;--perplexity:#6b7280;--deepseek:#eab308}
+.character-card.ai-A{--costume:var(--chatgpt);--costume-soft:#e9d5ff;--costume-dark:#4c1d95}
+.character-card.ai-B{--costume:var(--copilot);--costume-soft:#fecaca;--costume-dark:#7f1d1d}
+.character-card.ai-C{--costume:var(--claude);--costume-soft:#bfdbfe;--costume-dark:#1e3a8a}
+.character-card.ai-D{--costume:var(--gemini);--costume-soft:#bbf7d0;--costume-dark:#14532d}
+.character-card.ai-E{--costume:var(--perplexity);--costume-soft:#e5e7eb;--costume-dark:#374151}
+.character-card.ai-F{--costume:var(--deepseek);--costume-soft:#fef08a;--costume-dark:#713f12}
+.character-card{background:linear-gradient(155deg,var(--costume),var(--costume-dark))!important;border-color:color-mix(in srgb,var(--costume) 70%,white)!important}
+.character-art{background:radial-gradient(circle at 50% 68%,var(--costume-soft) 0 28%,color-mix(in srgb,var(--costume) 35%,white) 50%,var(--costume-dark) 100%)!important}
+.character-art:before{background:linear-gradient(145deg,#ffffff55,transparent 52%,color-mix(in srgb,var(--costume) 68%,transparent))!important;border:2px solid #ffffff99;box-shadow:inset 0 0 32px color-mix(in srgb,var(--costume) 55%,transparent)!important}
+.character-copy{background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--costume-dark) 92%,transparent))!important}
+.character-details .detail-icon,.character-card .meet-badge{background:var(--costume)!important;color:#fff!important}
+.character-details li{border-color:color-mix(in srgb,var(--costume-soft) 55%,transparent)!important}
+/* 服飾圖層：領章、披肩與人格道具使用同一主色 */
+.character-art .costume-overlay{position:absolute;inset:0;z-index:3;pointer-events:none}
+.costume-overlay:before{content:"";position:absolute;left:16%;right:16%;bottom:0;height:37%;background:linear-gradient(150deg,var(--costume),var(--costume-dark));clip-path:polygon(12% 0,42% 20%,50% 7%,58% 20%,88% 0,100% 100%,0 100%);opacity:.34;mix-blend-mode:color;filter:saturate(1.5)}
+.costume-overlay:after{position:absolute;left:15px;top:14px;padding:7px 10px;border-radius:999px;background:var(--costume);border:2px solid #fff;color:#fff;font-size:.7rem;font-weight:1000;box-shadow:0 7px 18px #0f172944}
+.ai-A .costume-overlay:after{content:"紫色魔法袍・靈感光紋"}.ai-B .costume-overlay:after{content:"紅色指揮服・任務肩章"}.ai-C .costume-overlay:after{content:"藍色學者衣・書頁飾帶"}.ai-D .costume-overlay:after{content:"綠色探險裝・媒體護目鏡"}.ai-E .costume-overlay:after{content:"灰色調查衣・證據徽章"}.ai-F .costume-overlay:after{content:"黃色工程甲・齒輪腰帶"}
+/* 圖像色彩校正，與指定服裝色一致 */
+.avatar-A{filter:hue-rotate(0deg) saturate(1.38) contrast(1.04) drop-shadow(0 15px 20px #4c1d9588)!important}
+.avatar-B{filter:hue-rotate(128deg) saturate(2.15) contrast(1.08) drop-shadow(0 15px 20px #7f1d1d88)!important}
+.avatar-C{filter:hue-rotate(0deg) saturate(1.42) contrast(1.04) drop-shadow(0 15px 20px #1e3a8a88)!important}
+.avatar-D{filter:hue-rotate(74deg) saturate(1.82) contrast(1.05) drop-shadow(0 15px 20px #14532d88)!important}
+.avatar-E{filter:grayscale(.88) saturate(.22) contrast(1.12) drop-shadow(0 15px 20px #37415188)!important}
+.avatar-F{filter:sepia(.72) hue-rotate(350deg) saturate(2.7) brightness(1.13) contrast(1.03) drop-shadow(0 15px 20px #a1620788)!important}
+/* 結果頁單一角色與融合角色沿用同一色彩規則 */
+.result-character{background:radial-gradient(circle,var(--result-soft,#fff),transparent 66%);border-radius:34px}
+.fusion-stage .fusion-character{background:transparent!important}
+.fusion-costume span:first-child{border:2px solid var(--mix-a);box-shadow:inset 7px 0 0 var(--mix-a)}
+.fusion-costume span:last-child{border:2px solid var(--mix-b);box-shadow:inset 7px 0 0 var(--mix-b)}
+.costume-key{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0 24px}.costume-key div{padding:10px 12px;border-radius:14px;color:#fff;background:linear-gradient(135deg,var(--key),color-mix(in srgb,var(--key) 68%,#111827));font-size:.77rem;font-weight:1000;box-shadow:0 8px 20px color-mix(in srgb,var(--key) 25%,transparent)}
+@media(max-width:650px){.costume-key{grid-template-columns:repeat(2,1fr)}.costume-overlay:after{font-size:.62rem;left:9px;top:9px}}
+
+
+/* 角色形象2.0：從職業輪廓、功能服飾、配件與紋樣建立辨識度 */
+.character-card{--metal:#f8fafc;--accent:#fff;--pattern:none}
+.ai-A{--metal:#f5d0fe;--accent:#facc15}.ai-B{--metal:#fee2e2;--accent:#f8fafc}.ai-C{--metal:#dbeafe;--accent:#fbbf24}.ai-D{--metal:#dcfce7;--accent:#fbbf24}.ai-E{--metal:#f3f4f6;--accent:#60a5fa}.ai-F{--metal:#fef3c7;--accent:#1f2937}
+.character-card{min-height:500px!important;grid-template-rows:270px 1fr!important;overflow:hidden}
+.character-art{height:270px!important;padding:16px 18px 0!important}
+.character-art img{z-index:2;position:relative;max-width:92%;margin:auto}
+.costume-frame{position:absolute;inset:0;z-index:4;pointer-events:none}
+.costume-frame .crest{position:absolute;left:16px;top:16px;width:54px;height:54px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(145deg,var(--costume),var(--costume-dark));border:3px solid #fff;color:#fff;font-size:27px;box-shadow:0 10px 24px #0f172944}
+.costume-frame .role-label{position:absolute;right:16px;top:17px;padding:7px 11px;border-radius:999px;background:#ffffffea;color:var(--costume-dark);border:2px solid var(--costume);font-size:.7rem;font-weight:1000;letter-spacing:.04em}
+.costume-frame .silhouette{position:absolute;left:10%;right:10%;bottom:-3px;height:46%;background:linear-gradient(135deg,color-mix(in srgb,var(--costume) 78%,transparent),color-mix(in srgb,var(--costume-dark) 72%,transparent));opacity:.26;clip-path:var(--silhouette);mix-blend-mode:color}
+.costume-frame .motif{position:absolute;right:19px;bottom:14px;width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:var(--accent);color:var(--costume-dark);border:2px solid #fff;font-size:24px;box-shadow:0 8px 18px #0f172944}
+.ai-A{--silhouette:polygon(13% 100%,19% 28%,34% 12%,43% 28%,50% 3%,57% 28%,68% 12%,82% 28%,88% 100%)}
+.ai-B{--silhouette:polygon(8% 100%,17% 20%,39% 7%,50% 20%,61% 7%,83% 20%,92% 100%)}
+.ai-C{--silhouette:polygon(10% 100%,18% 15%,34% 4%,50% 16%,66% 4%,82% 15%,90% 100%)}
+.ai-D{--silhouette:polygon(8% 100%,16% 24%,32% 12%,44% 24%,50% 7%,56% 24%,68% 12%,84% 24%,92% 100%)}
+.ai-E{--silhouette:polygon(9% 100%,18% 16%,37% 6%,50% 17%,63% 6%,82% 16%,91% 100%)}
+.ai-F{--silhouette:polygon(5% 100%,13% 18%,34% 6%,44% 20%,50% 4%,56% 20%,66% 6%,87% 18%,95% 100%)}
+.costume-blueprint{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:11px 0 12px}.blueprint-item{padding:9px 10px;border-radius:12px;background:#02061745;border:1px solid #ffffff2b;color:#fff;font-size:.76rem;line-height:1.42}.blueprint-item b{display:block;color:var(--metal);font-size:.68rem;letter-spacing:.06em;margin-bottom:2px}.character-details{margin-top:2px}.character-quote{border-top:1px dashed #ffffff55;margin-top:auto!important}
+.ai-F .blueprint-item{background:#fff8c7d9;color:#422006;border-color:#92400e2e}.ai-F .blueprint-item b{color:#713f12}.ai-F .character-quote{border-color:#92400e55}
+/* 各職業服飾的功能細節 */
+.ai-A .character-art{background:radial-gradient(circle at 50% 58%,#f5d0fe,#a855f7 48%,#4c1d95)!important}
+.ai-B .character-art{background:radial-gradient(circle at 50% 58%,#fee2e2,#ef4444 48%,#7f1d1d)!important}
+.ai-C .character-art{background:radial-gradient(circle at 50% 58%,#dbeafe,#3b82f6 48%,#1e3a8a)!important}
+.ai-D .character-art{background:radial-gradient(circle at 50% 58%,#dcfce7,#22c55e 48%,#14532d)!important}
+.ai-E .character-art{background:radial-gradient(circle at 50% 58%,#f3f4f6,#9ca3af 48%,#374151)!important}
+.ai-F .character-art{background:radial-gradient(circle at 50% 58%,#fef9c3,#facc15 48%,#854d0e)!important}
+/* 融合結果中的兩套服飾提高可讀性 */
+.fusion-costume{margin:14px auto 2px;max-width:760px}.fusion-costume span{background:#ffffffef!important;padding:8px 13px!important}.fusion-stage{border-width:5px!important}.fusion-ribbon{bottom:10px!important}
+@media(max-width:760px){.character-card{min-height:475px!important;grid-template-rows:240px 1fr!important}.character-art{height:240px!important}.costume-blueprint{grid-template-columns:1fr}.costume-frame .role-label{font-size:.62rem;max-width:54%;white-space:normal;text-align:center}}
+
+
+/* 首頁精簡角色展示 + 保持角色自然暖白膚色 */
+.character-card{min-height:390px!important;grid-template-rows:270px 1fr!important}
+.character-copy{padding:18px 20px 22px!important}
+.character-name{font-size:1.24rem!important;margin-bottom:6px!important}
+.character-role{font-size:.95rem!important;margin-bottom:10px!important}
+.character-quote{margin-top:8px!important;padding-top:12px!important;line-height:1.62!important}
+/* 不再以色相濾鏡改變整張人物圖，避免膚色被角色背景色染色 */
+.character-art{isolation:isolate!important}
+.character-art img,.result-character,.fusion-character{filter:drop-shadow(0 15px 20px #0f172966)!important;mix-blend-mode:normal!important;opacity:1!important}
+.avatar-A,.avatar-B,.avatar-C,.avatar-D,.avatar-E,.avatar-F{filter:drop-shadow(0 15px 20px #0f172966)!important;mix-blend-mode:normal!important}
+/* 停用覆蓋人物身體的大面積染色層，只保留角色徽章和職業標籤 */
+.costume-overlay,.costume-frame .silhouette{display:none!important}
+.costume-frame{z-index:4!important}
+.costume-frame .crest,.costume-frame .role-label,.costume-frame .motif{display:grid!important}
+/* 人物圖使用獨立白色光暈，把膚色與彩色背景分隔 */
+.character-art:after{content:""!important;position:absolute!important;left:18%!important;right:18%!important;top:8%!important;bottom:2%!important;border-radius:42% 42% 30% 30%!important;background:radial-gradient(circle at 50% 38%,#fffdf7 0 22%,#fff7e6cc 34%,transparent 67%)!important;z-index:1!important;pointer-events:none!important}
+.character-art img{z-index:2!important;position:relative!important}
+/* 黃色角色維持深色文字，其餘角色維持白色文字 */
+.ai-F .character-name,.ai-F .character-role,.ai-F .character-quote{color:#292524!important}
+@media(max-width:760px){.character-card{min-height:370px!important;grid-template-rows:240px 1fr!important}}
+
+
+/* 角色卡版面重整：桌面3欄、平板2欄、手機1欄 */
+.hero.card{width:min(1180px,100%)!important}
+.character-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important;align-items:stretch!important;margin:24px 0 30px!important}
+.character-card{min-width:0!important;min-height:390px!important;display:grid!important;grid-template-rows:235px 1fr!important;border-radius:26px!important;overflow:hidden!important;transform:none!important}
+.character-card:hover{transform:translateY(-6px)!important}
+.character-art{height:235px!important;padding:12px 12px 0!important;display:grid!important;place-items:end center!important}
+.character-art img{width:100%!important;height:100%!important;max-width:100%!important;object-fit:contain!important;object-position:center bottom!important}
+.character-copy{min-height:155px!important;display:flex!important;flex-direction:column!important;padding:17px 18px 19px!important;text-align:left!important}
+.character-name{font-size:1.08rem!important;line-height:1.35!important;margin:0 0 4px!important;white-space:normal!important}
+.character-role{font-size:.86rem!important;line-height:1.4!important;margin:0 0 9px!important}
+.character-quote{margin:auto 0 0!important;padding-top:10px!important;font-size:.79rem!important;line-height:1.6!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+.meet-badge{top:12px!important;right:12px!important;padding:5px 9px!important;font-size:.62rem!important}
+.costume-frame .crest{left:12px!important;top:12px!important;width:44px!important;height:44px!important;border-radius:14px!important;font-size:22px!important}
+.costume-frame .role-label{right:11px!important;top:50px!important;font-size:.57rem!important;padding:5px 8px!important;max-width:56%!important;text-align:center!important}
+.costume-frame .motif{right:12px!important;bottom:11px!important;width:42px!important;height:42px!important;border-radius:13px!important;font-size:21px!important}
+/* 移除首頁重複的簡短角色色帶，讓角色卡成為主要導覽 */
+.types{display:none!important}
+.intro-title{margin-top:24px!important}.intro-sub{max-width:760px!important;margin-left:auto!important;margin-right:auto!important}
+/* 卡片之間保持一致的文字對比 */
+.character-card:not(.ai-F) .character-name,.character-card:not(.ai-F) .character-role,.character-card:not(.ai-F) .character-quote{color:#fff!important}
+.character-card.ai-F .character-copy{background:linear-gradient(180deg,#fff0,#fef3c7e8)!important}
+@media(max-width:980px){
+ .hero.card{width:min(820px,100%)!important}
+ .character-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .character-card{grid-template-rows:245px 1fr!important}
+ .character-art{height:245px!important}
+}
+@media(max-width:620px){
+ .character-grid{grid-template-columns:1fr!important;gap:16px!important}
+ .character-card{width:100%!important;min-height:365px!important;grid-template-rows:225px 1fr!important}
+ .character-art{height:225px!important}
+ .character-copy{min-height:140px!important;padding:16px 17px 18px!important}
+ .character-name{font-size:1.05rem!important}
+ .character-quote{-webkit-line-clamp:4!important}
+}
+
+</style>
+</head>
+<body><div class="ai-icon-field" aria-hidden="true">
+<span class="ai-bg-icon" style="--speed:7s;--rotate:-12deg">💡</span>
+<span class="ai-bg-icon" style="--speed:9s;--rotate:10deg">🧭</span>
+<span class="ai-bg-icon" style="--speed:8s;--rotate:-7deg">📚</span>
+<span class="ai-bg-icon" style="--speed:10s;--rotate:13deg">🌐</span>
+<span class="ai-bg-icon" style="--speed:7.5s;--rotate:-10deg">🔎</span>
+<span class="ai-bg-icon" style="--speed:9.5s;--rotate:8deg">⚙️</span>
+<span class="ai-bg-icon" style="--speed:8.5s;--rotate:-5deg">✨</span>
+<span class="ai-bg-icon" style="--speed:11s;--rotate:11deg">🤖</span>
+<span class="ai-bg-icon" style="--speed:7.8s;--rotate:-9deg">🧠</span>
+<span class="ai-bg-icon" style="--speed:10.5s;--rotate:6deg">💬</span>
+</div><main id="app"></main>
+<script>
+const TYPE_COLORS={A:['#7c3aed','#c084fc'],B:['#ef4444','#fb7185'],C:['#2563eb','#60a5fa'],D:['#16a34a','#4ade80'],E:['#6b7280','#cbd5e1'],F:['#eab308','#fde047']};
+
+const PROFILES={
+ A:{image:'assets/chatgpt-purple-magician.png',emoji:'🪄',personality:'熱情、健談、靈活，總能從一個念頭延伸出多種可能。',charm:'把艱深內容變成故事、活動與令人投入的創意體驗。',weakness:'靈感有時跑得太快，需要停下來核實事實與聚焦重點。',quote:'「只有一個答案？不如先想出十種可能！」'},
+ B:{image:'assets/copilot-red-commander.png',emoji:'🧭',personality:'穩重、務實、有組織，喜歡把混亂整理成清晰步驟。',charm:'可靠地把構思變成文件、簡報、流程與真正可完成的任務。',weakness:'過早進入執行模式時，可能壓縮探索與創意空間。',quote:'「想法很好，現在讓我們把它真正完成。」'},
+ C:{image:'assets/claude-blue-scholar.png',emoji:'📚',personality:'溫和、細膩、耐心，重視脈絡、語氣與深層意義。',charm:'願意讀完整份材料，再找出觀點之間微妙但重要的連繫。',weakness:'思考太周詳時可能較慢作決定，需要設定行動時限。',quote:'「先別急着下結論，讓我們理解整體脈絡。」'},
+ D:{image:'assets/gemini-green-explorer.png',emoji:'🌐',personality:'好奇、敏捷、視野廣闊，喜歡文字、圖片、影片與地圖。',charm:'能把跨媒體線索連起來，讓知識變成一場充滿發現的探索。',weakness:'搜尋方向太多時容易失焦，需要篩選最重要的線索。',quote:'「文字只是入口，世界各處都藏着線索！」'},
+ E:{image:'assets/perplexity-gray-investigator.png',emoji:'🔎',personality:'理性、直接、重視證據，看到說法便會追問來源。',charm:'像調查記者般沿線索查證，協助大家分清事實與推論。',weakness:'有來源不代表一定正確，仍要判斷來源品質與論證。',quote:'「答案可以精彩，但證據在哪裏？」'},
+ F:{image:'assets/deepseek-yellow-engineer.png',emoji:'⚙️',personality:'冷靜、理性、重視效率，擅長把複雜問題逐層拆解。',charm:'能看見問題背後的結構，找出規律並建立可行解法。',weakness:'太專注技術答案時，可能忽略感受、文化與溝通方式。',quote:'「別被問題嚇倒，把它拆開就容易了。」'}
+};
+
+const TYPES={
+A:{name:"ChatGPT 型",title:"靈感奔流的創意魔法師",icon:"💡",color:"from-emerald-400 to-teal-600",desc:"你充滿想像力，擅長透過交流開拓可能性，並把抽象概念變得生動有趣。",strength:"創意、表達、靈活應變",growth:"篩選點子並核實資訊",partner:"Copilot 型、Perplexity 型"},
+B:{name:"Microsoft Copilot 型",title:"沉着可靠的任務指揮官",icon:"🧭",color:"from-blue-400 to-indigo-600",desc:"你務實而有組織，擅長把零散想法整理成清晰計劃，推動團隊完成任務。",strength:"規劃、整理、執行",growth:"為探索與創意預留空間",partner:"ChatGPT 型、Gemini 型"},
+C:{name:"Claude 型",title:"月光圖書館的沉思學者",icon:"📚",color:"from-amber-400 to-orange-600",desc:"你細膩、耐心，重視脈絡與深度，習慣理解不同觀點後才作判斷。",strength:"深度閱讀、分析、同理",growth:"設定思考時限，適時行動",partner:"Perplexity 型、Copilot 型"},
+D:{name:"Gemini 型",title:"穿梭萬象的多媒體探險家",icon:"🌐",color:"from-violet-400 to-fuchsia-600",desc:"你好奇而開放，喜歡探索不同媒體與領域，並把看似無關的線索連結起來。",strength:"探索、跨學科、多媒體",growth:"收窄範圍並聚焦重點",partner:"DeepSeek 型、Claude 型"},
+E:{name:"Perplexity 型",title:"追尋真相的銀徽記者",icon:"🔎",color:"from-cyan-400 to-sky-600",desc:"你理性而謹慎，重視來源與證據，會主動區分事實、意見與推測。",strength:"搜尋、查證、資訊判斷",growth:"接受資料不完整時仍可探索",partner:"ChatGPT 型、Claude 型"},
+F:{name:"DeepSeek 型",title:"極速拆解的邏輯工程師",icon:"⚙️",color:"from-slate-500 to-slate-800",desc:"你冷靜、直接，善於找出規律，並把複雜問題拆成清晰而可處理的步驟。",strength:"推理、解難、系統思考",growth:"兼顧感受、文化與表達方式",partner:"Gemini 型、ChatGPT 型"}};
+const L=["A","B","C","D","E","F"];
+
+
+const COSTUME_SPEC={
+ A:{crest:'✦',role:'ARCANE CREATOR',motif:'💡',cut:'星形高領魔法袍、分層短斗篷、寬袖口',material:'紫色天鵝絨感布料、金色滾邊、發光符文',gear:'燈泡法杖、顏料腰包、概念卷軸',identity:'不對稱星紋與流動光帶，表現想像和概念跳接'},
+ B:{crest:'◆',role:'MISSION COMMAND',motif:'📋',cut:'挺身雙排指揮外套、短披肩、結構化肩線',material:'紅色機能布、白色反光線、霧銀扣件',gear:'全息任務板、時間模組、文件收納帶',identity:'清晰分區、階級肩章和直線剪裁，表現秩序與執行'},
+ C:{crest:'◈',role:'DEEP SCHOLAR',motif:'📖',cut:'長版學者外衣、交疊領、柔軟披肩',material:'深淺藍層次、米白書頁紋、古金書扣',gear:'浮空書冊、羽筆、脈絡書籤與註記帶',identity:'垂直長線和層疊書頁，表現耐心、深讀與觀點比較'},
+ D:{crest:'✣',role:'MEDIA EXPLORER',motif:'📷',cut:'短版探險外套、多口袋背心、活動式護膝',material:'綠色耐磨布、卡其織帶、金色定位扣',gear:'智能相機、折疊地圖、多媒體護目鏡',identity:'功能口袋和可拆模組，表現探索、跨域連結與適應力'},
+ E:{crest:'⬡',role:'TRUTH INVESTIGATOR',motif:'🔎',cut:'灰色長風衣、雙層翻領、貼身調查背心',material:'炭灰斜紋布、銀色證據夾、藍灰細節',gear:'放大鏡、來源卡套、線索筆記與時間戳章',identity:'低彩度格紋和精密收納，表現中立、查核與證據判斷'},
+ F:{crest:'⚙',role:'LOGIC ENGINEER',motif:'⚙️',cut:'黃色工程連身裝、模組化護甲、強化工作靴',material:'高可視黃色布料、炭黑護片、金屬鉚釘',gear:'齒輪工具箱、邏輯模組、可拆式機械臂',identity:'幾何接縫和機械護片，表現系統分析、拆解與效率'}
+};
+
+const SHOWCASE={
+ A:{color:'紫色服裝',symbol:'💡 靈感燈泡',focus:'突出創意、想像、表達及概念連結'},
+ B:{color:'紅色服裝',symbol:'📋 任務控制板',focus:'突出規劃、組織、可靠及執行能力'},
+ C:{color:'藍色服裝',symbol:'📖 書本',focus:'突出深度閱讀、耐心、脈絡理解及觀點分析'},
+ D:{color:'綠色服裝',symbol:'📷 相機',focus:'突出好奇、探索、跨領域及多媒體連結'},
+ E:{color:'灰色服裝',symbol:'🔎 放大鏡',focus:'突出來源核查、證據判斷及資訊辨識'},
+ F:{color:'黃色服裝',symbol:'⚙️ 齒輪',focus:'突出邏輯、系統分析、問題拆解及效率'}
+};
+
+
+
+const MIXED_DETAILS={
+ AB:{name:'靈感領航者',integration:'你同時重視創意可能性與實際完成。你不只會提出新點子，也自然地思考如何安排步驟、資源與期限，讓構思真正落地。',charm:'你能在「想得新」與「做得到」之間搭橋，特別適合帶領需要創新但又有明確交付要求的工作。',blind:'你可能一次啟動太多值得做的計劃，或者在創意仍需醞釀時便急着建立流程。',growth:'先分開進行發散與執行：第一階段只產生方案，第二階段才按價值、成本與時間選擇。',example:'例如設計校本活動時，你可先提出多種玩法，再選一項製作時間表、分工及備用方案。'},
+ AC:{name:'幻思編劇師',integration:'你把想像力與深度理解結合。你既能創造生動表達，也會追問內容背後的假設、意義與不同立場。',charm:'你擅長把抽象或複雜議題轉化為令人投入的故事，同時保留思想層次。',blind:'你可能在內容深度與表達創意之間反覆修改，令作品較遲定稿。',growth:'先確立一個核心命題，再讓創意服務該命題；每次新增元素時問它是否加深理解。',example:'例如講解歷史事件時，你可用人物日記開場，再引導學生比較史料和觀點。'},
+ AD:{name:'萬象創作家',integration:'你喜歡由不同媒體、學科與經驗中尋找靈感，再把線索重新組合成新作品。',charm:'你能令學習或溝通變得豐富、有畫面，並為同一主題找到多種入口。',blind:'素材和方向可能愈來愈多，最後主題反而不夠集中。',growth:'先寫下一句核心訊息，所有圖片、影片與創意元素都必須能支持這句話。',example:'例如製作專題網站時，你可整合地圖、照片和互動故事，但保持每一區都回應同一研究問題。'},
+ AE:{name:'星證鍊金師',integration:'你願意提出大膽假設，也會追問證據、來源與可驗證程度。',charm:'你能令創意不流於空想，也能令查證工作不只停留在挑錯，而是產生更好的解釋。',blind:'你可能在點子剛出現時便過早審查，或者因找到部分證據便高估整個構想。',growth:'先標記「想法」和「已證實內容」，容許前者存在，再逐步提高證據要求。',example:'例如構思科普短片時，你可先設計吸引人的情節，再逐句核對數據和來源。'},
+ AF:{name:'奇想機巧師',integration:'你同時具有創意發散與結構化解難傾向，常能把新奇構思拆成模組、規則和可測試步驟。',charm:'你不只問「有甚麼新方法」，也會問「這個方法如何運作」。',blind:'你可能太快進入技術解法，忽略使用者是否真正需要這項創新。',growth:'在解題前加入使用者訪談或情境觀察，確認問題定義後才優化方案。',example:'例如設計學習工具時，你可提出遊戲化構思，再建立原型並請學生實際試用。'},
+ BC:{name:'藍圖智策師',integration:'你會在理解背景與不同觀點後，才建立穩健的行動計劃。',charm:'你的決定通常兼顧脈絡與執行細節，令人感到周全可靠。',blind:'你可能因希望資料完整、計劃周密而延遲啟動。',growth:'區分可逆與不可逆決定；可逆決定可先小規模試行，不必等齊所有資料。',example:'例如推行新教學法時，你可先研讀需要，再設計四星期小型試驗和檢討點。'},
+ BD:{name:'旅展策劃師',integration:'你能廣泛搜集多媒體素材，並把素材整理成有結構、有期限和可交付的成果。',charm:'你既看見內容的豐富性，也能維持專案秩序。',blind:'你可能把大量時間放在整理和格式，卻較少深入評估素材真正的意義。',growth:'除進度表外，加入內容判準，例如相關性、可信度與對受眾的價值。',example:'例如籌辦數碼展覽時，你可建立素材清單，同時為每件展品寫明選入理由。'},
+ BE:{name:'赤盾驗證官',integration:'你重視流程、責任與證據品質，傾向建立可重複、可核查的工作方法。',charm:'你能減少遺漏、資料錯誤和臨時混亂，提升成果可信度。',blind:'你可能把所有工作都視為需要同等嚴格的審核，增加團隊負擔。',growth:'按風險分級：高風險資料完整查證，低風險內容使用快速檢查清單。',example:'例如發布校訊前，你可對政策與數據作雙重核對，而一般活動照片只做基本檢查。'},
+ BF:{name:'系統統籌官',integration:'你喜歡把任務轉化為流程、條件與可監察指標，並持續尋找更有效率的方法。',charm:'你能令複雜工作穩定運作，尤其擅長找出瓶頸和重複工序。',blind:'過度追求效率可能令流程缺乏彈性，也可能忽略人的學習曲線。',growth:'優化流程時，同時收集使用者感受與例外情況，不只看速度。',example:'例如整理交功課流程時，你可自動化提醒，但仍保留學生特殊情況的處理渠道。'},
+ CD:{name:'文境巡遊者',integration:'你既願意探索廣闊素材，也會深入理解文化、脈絡與多重觀點。',charm:'你能把跨學科資訊轉化為有深度的理解，而不只是資料堆積。',blind:'你可能在每條有趣支線上停留太久，難以收束研究範圍。',growth:'使用「核心問題、重要支線、暫存線索」三層筆記，保持深度亦控制範圍。',example:'例如研究城市歷史時，你可結合地圖、口述史和建築，同時圍繞一個核心變遷問題。'},
+ CE:{name:'史證解碼師',integration:'你重視細讀、觀點理解與證據來源，傾向把文本放回其歷史和社會脈絡判斷。',charm:'你能發現來源之間微妙的差異，並避免把單一記錄當成完整真相。',blind:'你可能因為每份來源都有局限而不願形成暫定結論。',growth:'清楚標示結論信心程度，例如較有把握、仍待確認、存在爭議。',example:'例如比較兩份史料時，你可分析作者立場，再說明哪些事實可交叉確認。'},
+ CF:{name:'思辨建構師',integration:'你把深度思考與邏輯分析結合，既關注意義，也關注論證結構與條件。',charm:'你能處理人文問題中的複雜概念，同時指出推論是否成立。',blind:'你可能把豐富的人類經驗壓縮成過度整齊的模型。',growth:'完成邏輯分析後，加入反例、個案與情境差異，檢查模型遺漏甚麼。',example:'例如討論公平時，你可分析原則，也比較不同學生處境下原則如何產生不同結果。'},
+ DE:{name:'線索導航員',integration:'你喜歡廣泛探索新資訊，同時保持對來源、日期與證據的敏感。',charm:'你能快速建立資訊地圖，並把較可靠與較可疑的線索分開。',blind:'你可能同時開啟太多查證支線，耗費大量時間。',growth:'先按與核心問題的相關性排序，再決定哪些線索值得深入查證。',example:'例如研究網上熱話時，你可先整理主要說法，再優先核對影響最大的三項。'},
+ DF:{name:'綠能機巧師',integration:'你願意試用新工具、理解不同媒體，也喜歡拆解背後系統如何運作。',charm:'你能把探索轉化為原型和技術實驗，快速測試新可能。',blind:'新工具本身可能比真實需要更吸引你，形成為技術而技術。',growth:'每次試用工具前先定義學習或使用目標，事後評估工具是否真的改善成果。',example:'例如試用AI影片工具時，你可先確定它要幫助學生理解甚麼，而不是只追求視覺效果。'},
+ EF:{name:'灰金鑑證師',integration:'你結合證據查核與分析推理，會同時檢查來源可信度和論證是否成立。',charm:'你善於發現資料漏洞、錯誤前提和不合理推論，是資訊判斷的重要守門員。',blind:'你可能對不完整但有價值的早期構想過於嚴苛，也可能在人際討論中顯得像持續挑錯。',growth:'在指出問題時，同時提出可驗證的改善方法，將批判轉化為建設。',example:'例如檢查一份調查報告時，你可指出樣本限制，並建議下一輪如何改善抽樣與問題設計。'}
+};
+
+const RESULT_DETAILS={
+ A:{
+ construct:'你的結果主要對應「經驗開放性、創意想像與概念生成」。心理學中的開放性通常涉及 intellectual curiosity、creative imagination 與對新觀點的接受度；創意研究亦經常發現，較高的開放性與較多原創想法和跨概念連結相關。',
+ performance:'你傾向先看可能性，再看限制。遇到不熟悉的題目時，你可能很快想到比喻、故事或幾種替代方案，也較願意把尚未成熟的念頭說出來，透過交流逐步修整。你未必每次都依照同一條路完成工作，反而會按對象與情境改變表達方式。',
+ charm:'你的魅力在於令停滯的討論重新流動。當別人只看到「做不到」時，你較容易提出「可否換個角度」。這種特質能讓複雜知識變得生動，也能幫助團隊看見未被考慮的方向。',
+ blind:'你的想法可能增加得比篩選速度更快。當靈感很多時，你可能低估查證、優先次序和完成細節的重要性；流暢的解釋亦可能讓自己過早相信某個仍未驗證的構想。',
+ growth:'把創意分成「發散」與「收斂」兩階段。先容許自己大量構思，再使用三個問題篩選：有甚麼證據？對象真正需要甚麼？下一個可完成的小步驟是甚麼？這能保留創意，同時提高可行性。',
+ example:'例如準備一堂歷史課時，你可能很快想到角色扮演、短片、辯論和互動地圖。成長做法是先保留所有點子，再按學習目標、課時和學生程度選出一項主活動。',
+ knowledge:'研究把開放性視為包含智識好奇、審美敏感與創意想像的廣泛特質；研究結果描述的是群體層面的傾向，不代表每位高開放者都會在所有場合表現得同樣有創意。', refs:['Soto & John, 2017','Feist, 1998']},
+ B:{
+ construct:'你的結果主要對應「盡責性、自我調節與目標執行」。盡責性涵蓋組織、責任感、持續投入與完成工作等面向；大型統合分析顯示，盡責性是學業表現較穩定的人格預測因素之一，但它不等同能力或智力。',
+ performance:'你傾向把模糊任務變成時間表、清單和責任分工。開始工作前，你會留意目標、期限和完成標準；進行期間，你較可能檢查進度、整理檔案，並在偏離目標時重新調整。',
+ charm:'你帶給別人的感覺通常是「事情交給你會有下文」。團隊構思很多但欠缺推進時，你能把意見整理成可執行步驟，並讓每個人知道下一步要做甚麼。',
+ blind:'你可能過早鎖定流程，把仍在萌芽的想法視為干擾；當計劃被打亂時，也可能花太多精力恢復秩序。高度負責有時會令你承擔過多，不容易把工作交給別人。',
+ growth:'在計劃中加入「探索緩衝區」。先設定核心目標，再預留一小段時間讓團隊試驗新方法。也可以把工作分成必須完成、值得改善、可延後三層，避免每個細節都被當成同等重要。',
+ example:'例如籌備學校活動時，你可能立即建立流程表並分派工作。成長做法是先留十五分鐘讓組員提出新方案，再決定正式流程，既保持效率，也不會太早關閉創意。',
+ knowledge:'Big Five研究中的盡責性包含組織、勤奮或生產力與責任等細分面向。統合研究顯示它與學業表現相關，但關聯是機率性的，仍會受到能力、資源、動機與環境影響。', refs:['Soto & John, 2017','Mammadov, 2021']},
+ C:{
+ construct:'你的結果主要對應「認知投入、深度處理與智識謙遜」。Need for Cognition描述一個人投入並享受思考的傾向；智識謙遜則涉及承認知識限制、尊重不同觀點，以及在有充分理由時修正自己的看法。',
+ performance:'你通常不滿足於只有結論，而會追問推理、前提和語境。閱讀長文時，你會留意作者沒有明說的假設；遇到意見衝突時，你較願意先理解對方的理由，而不是立即把不同意見視作錯誤。',
+ charm:'你的魅力在於深度和細膩。你能把「大家都覺得差不多」的內容拆出重要差異，也能讓別人感到觀點被真正聽見。這使你特別適合處理長文、史料、倫理議題和需要平衡多方立場的工作。',
+ blind:'深入思考可能變成延遲決定。當資料永遠不完整時，你可能持續比較而難以行動；為了保持公平，你亦可能把所有觀點放在同一水平，忽略證據強弱其實不同。',
+ growth:'為思考設定停止規則，例如「找到三項可靠證據、列出兩個替代解釋後便作暫定決定」。智識謙遜不是永遠不確定，而是能在目前證據下作判斷，同時保留日後修正的空間。',
+ example:'例如批改學生文章時，你可能細看每段論證和語氣。成長做法是先按核心準則完成第一輪判斷，再在需要時補充細緻回饋，避免在單一段落停留過久。',
+ knowledge:'Need for Cognition強調投入及享受思考，而智識謙遜研究則包含觀點修正、尊重他人觀點及避免過度自信。兩者相關但不是同一構念，所以此AI角色只是教學上的整合隱喻。', refs:['Cacioppo & Petty, 1982','Krumrei-Mancuso & Rouse, 2016']},
+ D:{
+ construct:'你的結果主要對應「好奇心、探索傾向與經驗開放」。Curiosity and Exploration Inventory-II把好奇描述為主動尋找知識與新經驗，以及願意接近新奇、不確定和不可預測的情境。',
+ performance:'你常從一個線索延伸到另一個線索，並喜歡同時運用文字、圖片、地圖、聲音或影片理解主題。你容易注意到不同學科之間的連結，也較願意進入陌生領域，先探索再決定是否深入。',
+ charm:'你的魅力在於帶來廣度和新鮮感。你能讓團隊看見「這個課題還可以連到甚麼」，並把抽象內容轉化為多媒體、實地觀察或跨學科體驗。',
+ blind:'探索本身可能令人滿足，令你不斷增加分頁、素材和方向，卻較遲選定核心問題。新奇感下降後，你亦可能轉向另一個主題，留下尚未整理的資料。',
+ growth:'每次探索前先寫下一句核心問題，搜集後使用「停止、整理、選擇」三步：停止增加來源、整理共同主題、選出最能回答問題的材料。這能把好奇轉化為深入學習。',
+ example:'例如研究一個城市時，你可能同時查看地圖、建築照片、人口資料和訪談影片。成長做法是最後回到核心問題，例如「交通如何改變社區」，只保留真正有助回答的材料。',
+ knowledge:'好奇研究區分尋求知識或新經驗的動機，以及接近不確定與新奇情境的意願。香港大學生樣本的研究也提醒，量表的因素結構可能因文化與樣本而不同。', refs:['Kashdan et al., 2009','Ye et al., 2015']},
+ E:{
+ construct:'你的結果主要對應「主動開放思考、認知警覺與證據評估」。主動開放思考涉及考慮替代觀點、留意與原有信念衝突的證據、延後過早定論，以及願意按新資訊修正判斷。',
+ performance:'你遇到驚人說法時，較自然的反應是追問來源、日期、原始資料和其他可靠報道。你會區分「資料顯示甚麼」與「作者如何解釋」，也較少因為某個說法符合自己期望便立即接受。',
+ charm:'你的魅力在於提高團隊的資訊品質。當討論被傳聞或單一例子帶走時，你能把大家拉回證據、方法和可核查的來源，減少把自信語氣誤當成可靠性的風險。',
+ blind:'查證可能變成過度懷疑，令你在風險很低的情況也要求完整證據；你也可能因為一項資料有引用便高估它，而忽略來源品質、研究方法和引用是否真的支持主張。',
+ growth:'採用分級查證。高風險主張需要原始或權威來源及交叉核對；低風險構思可先標記為「暫定」再繼續。查證時同時問三條問題：來源是否可靠？證據是否直接支持主張？有沒有合理替代解釋？',
+ example:'例如群組傳來一則教育政策消息時，你可能先找官方文件。成長做法是不只確認網站名稱，還查看發布日期、適用對象和原文措辭，避免把舊資料或局部內容當成最新政策。',
+ knowledge:'AOT研究強調考慮反方證據、延後結論及反思；認知警覺則關注對消息來源與內容可信度的評估。這些傾向有助推理，但問卷分數不代表一個人永遠不受偏誤影響。', refs:['Stanovich & Toplak, 2023','Bielik & Krell, 2025']},
+ F:{
+ construct:'你的結果主要對應「分析思考、認知反思與系統解難」。這類傾向包括抑制第一個直覺答案、檢查條件、把複雜問題分解，以及測試答案在不同情況下是否仍成立。',
+ performance:'你面對大型問題時，常會先列出已知條件、限制和子問題，再逐項處理。你喜歡尋找規律、比較方法效率，也較願意用測試或反例檢查方案，而不只依賴直覺。',
+ charm:'你的魅力在於令複雜事情變得可處理。當團隊被大量資訊壓倒時，你能畫出流程、找出依賴關係，並指出真正需要先解決的瓶頸。',
+ blind:'不是所有問題都能化成單一最佳解。過度追求結構與效率，可能忽略人的感受、文化背景或一個方案在現實環境中的接受程度；邏輯正確也不代表前提資料一定正確。',
+ growth:'在技術分析後增加「人與情境檢查」。除了問方案是否有效，也問誰會受影響、使用者能否理解、前提是否可靠。遇到人文議題時，可把價值衝突列為條件，而不是視為雜訊。',
+ example:'例如設計學生數據分析流程時，你可能很快建立公式和分類。成長做法是再檢查資料是否完整、分類是否會誤解學生，以及教師需要甚麼解釋才能負責任地使用結果。',
+ knowledge:'認知反思研究常把「停下來檢查直覺答案」視為分析思考的一部分，部分研究亦發現較高反思與真假資訊辨識相關；但其他研究提醒，較低測驗表現不一定只代表缺乏努力或偏好直覺。', refs:['Nurse et al., 2021','Martire et al., 2023']}
+};
+
+const QUESTION_BANK=[{"id":1,"text":"我常能為同一個問題想出多種與別不同的處理方式","type":"A","reverse":false},{"id":2,"text":"即使只有模糊概念，我也樂於透過交流把想法逐步發展","type":"A","reverse":false},{"id":3,"text":"我喜歡把抽象內容改寫成故事、比喻或有趣活動","type":"A","reverse":false},{"id":4,"text":"面對開放式任務時，我通常感到投入而不是不知所措","type":"A","reverse":false},{"id":5,"text":"我會主動嘗試新穎的表達方式，即使結果未必完美","type":"A","reverse":false},{"id":6,"text":"我容易在不同概念之間建立意想不到的連結","type":"A","reverse":false},{"id":7,"text":"我寧願沿用熟悉答案，也不想測試新的可能性","type":"A","reverse":true},{"id":8,"text":"團隊陷入僵局時，我往往能提出令討論重新啟動的點子","type":"A","reverse":false},{"id":9,"text":"若沒有標準答案，我通常很難開始思考","type":"A","reverse":true},{"id":10,"text":"開始大型任務前，我會先安排步驟、時限與責任","type":"B","reverse":false},{"id":11,"text":"我習慣把零散資料整理成清晰而可執行的格式","type":"B","reverse":false},{"id":12,"text":"即使任務重複，我仍會按計劃完成必要細節","type":"B","reverse":false},{"id":13,"text":"我會定期檢查進度，並在偏離目標時作出調整","type":"B","reverse":false},{"id":14,"text":"我重視承諾，答應負責的工作通常會按時完成","type":"B","reverse":false},{"id":15,"text":"工作完成後，我會整理檔案並記錄可改善之處","type":"B","reverse":false},{"id":16,"text":"我常在沒有完成目前任務前便轉到另一件事","type":"B","reverse":true},{"id":17,"text":"遇到時間壓力時，我會先確定優先次序而非同時處理一切","type":"B","reverse":false},{"id":18,"text":"我認為規劃會限制效率，所以通常不會預先安排","type":"B","reverse":true},{"id":19,"text":"閱讀複雜材料時，我會先理解整體脈絡再作判斷","type":"C","reverse":false},{"id":20,"text":"我享受需要長時間思考的問題","type":"C","reverse":false},{"id":21,"text":"我會留意一段論述中的假設、語氣與未說明之處","type":"C","reverse":false},{"id":22,"text":"聽到不同觀點時，我願意先理解其理由再回應","type":"C","reverse":false},{"id":23,"text":"我較重視答案背後的推理，而不只是最終結論","type":"C","reverse":false},{"id":24,"text":"只要得到可用答案，我通常不想再了解原因","type":"C","reverse":true},{"id":25,"text":"我會反覆檢視自己的理解是否前後一致","type":"C","reverse":false},{"id":26,"text":"面對長文或複雜議題時，我傾向快速略過細節","type":"C","reverse":true},{"id":27,"text":"我喜歡同時運用文字、圖片、地圖或影音理解主題","type":"D","reverse":false},{"id":28,"text":"接觸陌生領域會令我想繼續探索更多背景","type":"D","reverse":false},{"id":29,"text":"我常把不同學科的知識連結起來","type":"D","reverse":false},{"id":30,"text":"規劃作品時，我會思考哪種媒體最能傳達內容","type":"D","reverse":false},{"id":31,"text":"我樂於從多個角度搜集素材，再建立整體圖像","type":"D","reverse":false},{"id":32,"text":"我只信任單一形式的資料，不太需要其他媒體補充","type":"D","reverse":true},{"id":33,"text":"我會主動探索超出原本問題範圍但可能有關的線索","type":"D","reverse":false},{"id":34,"text":"資料形式一多，我便不想再整理它們之間的關係","type":"D","reverse":true},{"id":35,"text":"看到令人驚訝的說法時，我會先追查原始來源","type":"E","reverse":false},{"id":36,"text":"新證據與原有看法衝突時，我願意修正判斷","type":"E","reverse":false},{"id":37,"text":"我會區分資料中的事實、推論與個人意見","type":"E","reverse":false},{"id":38,"text":"作結論前，我通常會比較多個獨立來源","type":"E","reverse":false},{"id":39,"text":"若證據不足，我願意暫時保留判斷","type":"E","reverse":false},{"id":40,"text":"只要資料符合我的看法，我通常不需要查核來源","type":"E","reverse":true},{"id":41,"text":"我會留意來源日期、作者立場及證據品質","type":"E","reverse":false},{"id":42,"text":"有引用或註腳的內容，我便會直接視為可靠","type":"E","reverse":true},{"id":43,"text":"面對複雜問題時，我會把它分拆成較小且可驗證的部分","type":"F","reverse":false},{"id":44,"text":"我喜歡找出系統中的規則、條件與因果關係","type":"F","reverse":false},{"id":45,"text":"提出解法後，我會測試它在不同條件下是否仍成立","type":"F","reverse":false},{"id":46,"text":"我常比較多種方法的效率、限制與失敗風險","type":"F","reverse":false},{"id":47,"text":"遇到錯誤時，我會沿着步驟追查問題出現的位置","type":"F","reverse":false},{"id":48,"text":"我較依賴直覺答案，不太需要檢查推理過程","type":"F","reverse":true},{"id":49,"text":"我享受需要邏輯推演或建立模型的任務","type":"F","reverse":false},{"id":50,"text":"問題看來複雜時，我通常不會嘗試拆解其結構","type":"F","reverse":true}];
+const RESPONSE_OPTIONS=[
+ {label:'非常不同意',value:1},{label:'不同意',value:2},{label:'同意',value:3},{label:'非常同意',value:4}
+];
+const TEST_LENGTH=20;
+const REFERENCES=[
+ 'Soto, C. J., & John, O. P. (2017). The next Big Five Inventory (BFI-2). Journal of Personality and Social Psychology, 113(1), 117–143. https://doi.org/10.1037/pspp0000096',
+ 'Lee, K., & Ashton, M. C. (2009). The HEXACO-60. Journal of Personality Assessment, 91(4), 340–345. https://doi.org/10.1080/00223890902935878',
+ 'Cacioppo, J. T., & Petty, R. E. (1982). The need for cognition. Journal of Personality and Social Psychology, 42(1), 116–131. https://doi.org/10.1037/0022-3514.42.1.116',
+ 'Stanovich, K. E., & Toplak, M. E. (2023). Actively open-minded thinking and its measurement. Journal of Intelligence, 11(2), 27. https://doi.org/10.3390/jintelligence11020027',
+ 'Gough, H. G. (1979). A creative personality scale for the Adjective Check List. Journal of Personality and Social Psychology, 37(8), 1398–1405. https://doi.org/10.1037/0022-3514.37.8.1398',
+ 'Feist, G. J. (1998). A meta-analysis of personality in scientific and artistic creativity. Personality and Social Psychology Review, 2(4), 290–309. https://doi.org/10.1207/S15327957PSPR0204_5',
+ 'Mammadov, S. (2021). Big Five personality traits and academic performance: A meta-analysis. Journal of Personality. https://doi.org/10.1111/jopy.12663',
+ 'Krumrei-Mancuso, E. J., & Rouse, S. V. (2016). The Development and Validation of the Comprehensive Intellectual Humility Scale. Journal of Personality Assessment, 98(2), 209–221. https://doi.org/10.1080/00223891.2015.1068174',
+ 'Kashdan, T. B., et al. (2009). The Curiosity and Exploration Inventory-II. Journal of Research in Personality, 43(6), 987–998. https://doi.org/10.1016/j.jrp.2009.04.011',
+ 'Ye, S., Ng, T. K., Yim, K. H., & Wang, J. (2015). Validation of the CEI-II among Chinese university students in Hong Kong. Journal of Personality Assessment, 97(4), 403–410. https://doi.org/10.1080/00223891.2015.1013546',
+ 'Bielik, T., & Krell, M. (2025). Developing and evaluating the extended epistemic vigilance framework. Journal of Research in Science Teaching, 62, 869–895. https://doi.org/10.1002/tea.21983',
+ 'Nurse, M. S., Ross, R. M., Isler, O., & Van Rooy, D. (2021). Analytic thinking predicts accuracy ratings and willingness to share COVID-19 misinformation. Memory & Cognition. https://doi.org/10.3758/s13421-021-01219-5',
+ 'Martire, K. A., et al. (2023). Thinking false and slow: Implausible beliefs and the Cognitive Reflection Test. Psychonomic Bulletin & Review. https://doi.org/10.3758/s13423-023-02321-2'
+];
+let state={started:false,index:0,answers:{},done:false,questions:[]};
+const app=document.getElementById('app');
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function drawQuestions(){
+ const chosen=[]; const used=new Set();
+ L.forEach(k=>{shuffle(QUESTION_BANK.filter(q=>q.type===k)).slice(0,3).forEach(q=>{chosen.push(q);used.add(q.id)})});
+ shuffle(QUESTION_BANK.filter(q=>!used.has(q.id))).slice(0,2).forEach(q=>chosen.push(q));
+ return shuffle(chosen);
+}
+function scores(){
+ const totals=Object.fromEntries(L.map(k=>[k,0])), counts=Object.fromEntries(L.map(k=>[k,0]));
+ state.questions.forEach(q=>{const raw=state.answers[q.id];if(!raw)return;const v=q.reverse?5-raw:raw;totals[q.type]+=v-1;counts[q.type]++});
+ return Object.fromEntries(L.map(k=>[k,counts[k]?Math.round(totals[k]/(counts[k]*3)*100):0]));
+}
+function characterCard(k){
+ const t=TYPES[k],p=PROFILES[k],colors=TYPE_COLORS[k],c=COSTUME_SPEC[k];
+ return `<article class="character-card ai-${k}" style="--c1:${colors[0]}66;--c2:${colors[1]}22"><span class="meet-badge">AI ${k}</span><div class="character-art">${p.image?`<img class="avatar-${k}" src="${p.image}" alt="${t.name}卡通角色">`:`<div class="css-mascot">${p.emoji}</div>`}<span class="costume-frame" aria-hidden="true"><span class="crest">${c.crest}</span><span class="role-label">${c.role}</span><span class="motif">${c.motif}</span></span></div><div class="character-copy"><div class="character-name">${t.icon} ${t.name}</div><div class="character-role">${t.title}</div><p class="character-quote">${p.quote}</p></div></article>`
+}
+
+function render(){
+ if(!state.started){app.innerHTML=`<section class="screen center"><div class="card pad hero"><div class="robot">🤖</div><p class="eyebrow">研究知情的 AI 思考風格測驗</p><h1>你是哪一位 AI 夥伴？</h1><p class="sub">這是一個以六種AI角色作為隱喻的思考風格自我探索測試。你會回答20條隨機抽選的陳述，了解自己在創意、規劃、深度思考、探索、查證和邏輯解難方面的相對傾向。測試結果只供教育與自我反思，不代表臨床心理評估或固定人格標籤。</p><div class="types">${L.map(k=>`<div class="type-chip"><b>${TYPES[k].icon}</b>${TYPES[k].name}</div>`).join('')}</div><h2 class="intro-title">六種研究知情的思考風格</h2><p class="intro-sub">題目參考人格、認知投入、創意與開放思考研究重新撰寫，並非複製正式量表題目。</p><div class="role-key"><div style="--rk:#7c3aed"><span></span>ChatGPT・創意魔法師</div><div style="--rk:#dc2626"><span></span>Copilot・任務指揮官</div><div style="--rk:#2563eb"><span></span>Claude・沉思學者</div><div style="--rk:#16a34a"><span></span>Gemini・多媒體探險家</div><div style="--rk:#6b7280"><span></span>Perplexity・真相調查員</div><div style="--rk:#eab308"><span></span>DeepSeek・邏輯工程師</div></div><div class="character-grid">${L.map(k=>characterCard(k)).join('')}</div><button class="btn" onclick="start()">開始測試</button><p class="note">本工具屬教育及自我反思用途，尚未經獨立樣本進行信效度驗證，不應用於臨床、招聘或高風險決策。</p></div></section>`;return}
+ if(state.done){renderResult();return}
+ const q=state.questions[state.index],answered=Object.keys(state.answers).length,selected=state.answers[q.id];
+ app.innerHTML=`<section class="screen"><div class="wrap"><div class="topline"><span>本次隨機測驗</span><span>${answered} / ${TEST_LENGTH} 已回答</span></div><div class="progress"><div class="bar" style="width:${((state.index+(selected?1:0))/TEST_LENGTH)*100}%"></div></div><section class="card question"><div class="qnum">第 ${state.index+1} 題 · 題庫編號 ${q.id}</div><h2>${q.text}</h2><div class="options">${RESPONSE_OPTIONS.map((o,idx)=>`<button class="option ${selected===o.value?'selected':''}" onclick="pick(${o.value})"><span class="letter">${idx+1}</span><span>${o.label}</span>${selected===o.value?'<span class="tick">✓</span>':''}</button>`).join('')}</div></section><div class="nav"><button class="btn alt" onclick="prev()" ${state.index===0?'disabled':''}>← 上一題</button>${state.index<TEST_LENGTH-1?`<button class="btn" onclick="next()" ${!selected?'disabled':''}>下一題 →</button>`:`<button class="btn" onclick="finish()" ${answered<TEST_LENGTH?'disabled':''}>查看結果 ✨</button>`}</div></div></section>`;
+}
+
+
+
+function fusionCharacter(a,b,m){
+ const pa=PROFILES[a],pb=PROFILES[b],ca=TYPE_COLORS[a][0],cb=TYPE_COLORS[b][0];
+ const wardrobe={A:'紫色星紋魔法袍＋燈泡法杖',B:'紅色雙排指揮服＋全息任務板',C:'藍色長版學者衣＋浮空書冊',D:'綠色多口袋探險裝＋智能相機',E:'灰色雙領調查風衣＋證據卡套',F:'黃色模組工程甲＋齒輪工具箱'};
+ const props={A:'💡',B:'📋',C:'📖',D:'📷',E:'🔎',F:'⚙️'};
+ return `<div class="fusion-stage" style="--mix-a:${ca};--mix-b:${cb}"><img class="fusion-character left avatar-${a}" src="${pa.image}" alt="${TYPES[a].name}角色元素"><img class="fusion-character right avatar-${b}" src="${pb.image}" alt="${TYPES[b].name}角色元素"><div class="fusion-core"><span>${props[a]}${props[b]}</span></div><div class="fusion-ribbon">${m.name}・雙特質融合形象</div></div><div class="fusion-costume"><span>${wardrobe[a]}</span><span>${wardrobe[b]}</span></div>`
+}
+
+function mixedProfile(keys){
+ const pair=[...keys].sort(), code=pair.join(''), m=MIXED_DETAILS[code];
+ if(!m){return `<div class="result-disclaimer">你的結果呈現多重而靈活的思考傾向。請把下方分數視為一張個人思考地圖，觀察你在不同情境中會啟動哪些方法。</div>`}
+ const a=pair[0],b=pair[1],ca=TYPE_COLORS[a][0],cb=TYPE_COLORS[b][0];
+ return `<div class="mixed-profile" style="--mix-a:${ca};--mix-b:${cb}">${fusionCharacter(a,b,m)}<section class="mixed-hero"><span class="mix-badge">${TYPES[a].icon} ${TYPES[a].name} × ${TYPES[b].icon} ${TYPES[b].name}</span><h3>${m.name}</h3><p class="mix-tagline">你不是兩種人格的簡單相加，而是把兩套思考力量組合成自己的方法。</p><p>${m.integration}</p></section><div class="mixed-pair"><section class="mixed-role" style="--mix-color:${ca}"><h4>${TYPES[a].name}為你帶來的力量</h4><p>${RESULT_DETAILS[a].performance}</p></section><section class="mixed-role" style="--mix-color:${cb}"><h4>${TYPES[b].name}為你帶來的力量</h4><p>${RESULT_DETAILS[b].performance}</p></section></div><section class="mixed-section"><h3>✨ 你的融合魅力</h3><p>${m.charm}</p></section><section class="mixed-section"><h3>⚠ 當兩種力量同時過強</h3><p>${m.blind}</p></section><section class="mixed-section"><h3>🌱 把組合優勢用得更成熟</h3><p>${m.growth}</p><p class="mixed-example"><strong>放進生活看看：</strong>${m.example}</p></section><section class="knowledge-box"><h3>📘 如何理解你的混合型</h3><p>這個結果表示本次作答中，兩種思考傾向同樣突出。你可能在不同情境中切換，也可能在同一任務內先後使用兩種方法。混合型並非矛盾，而是彈性。它也不是固定標籤，而是一個邀請：留意甚麼情境會令其中一種力量走到前台，以及另一種力量如何補位。</p><p class="source-links"><strong>研究脈絡：</strong>${RESULT_DETAILS[a].refs.join('；')}；${RESULT_DETAILS[b].refs.join('；')}。完整出處見下方文獻列表。</p></section></div>`
+}
+
+function detailedProfile(k){
+ const d=RESULT_DETAILS[k];
+ const sections=[
+  ['🧭','研究構念',d.construct,'#7c3aed'],
+  ['👤','你的人格表現',d.performance,'#2563eb'],
+  ['✨','你的角色魅力',d.charm,'#db2777'],
+  ['⚠','你可能遇到的盲點',d.blind,'#ea580c'],
+  ['🌱','你的成長方向',d.growth,'#16a34a']
+ ];
+ return `<div class="deep-profile">${sections.map(([icon,title,text,color],i)=>`<section class="deep-section" style="--section-color:${color}"><span class="deep-icon">${icon}</span><h3>${title}</h3><p>${text}</p>${i===4?`<p class="life-example"><strong>生活例子：</strong>${d.example}</p>`:''}</section>`).join('')}</div><section class="knowledge-box"><h3>📘 相關心理學知識</h3><p>${d.knowledge}</p><p class="source-links"><strong>本段參考：</strong>${d.refs.join('；')}。完整出處見頁面下方文獻列表。</p></section><div class="result-disclaimer"><strong>如何閱讀這個結果：</strong>百分比分數表示你在本次20題中展現的相對傾向，不是人口百分位，也不是固定不變的身份。人格會受到情境、角色、經驗與發展階段影響；請把結果當成提出問題的起點，而不是替自己下定論。</div>`
+}
+
+function renderResult(){
+ const s=scores(),ranked=[...L].sort((a,b)=>s[b]-s[a]),top=ranked[0],tied=ranked.filter(k=>Math.abs(s[k]-s[top])<=2),t=TYPES[top],p=PROFILES[top];
+ const constructs={A:'創意想像、觀念開放與表達彈性',B:'盡責性、組織、持續力與責任感',C:'認知投入、深度理解與反思傾向',D:'探索廣度、跨媒體好奇與經驗開放',E:'證據敏感、延後定論與主動開放思考',F:'分析分解、系統推理與解難偏好'};
+ app.innerHTML=`<section class="screen"><div class="card" style="margin:auto"><div class="result-head" style="background:linear-gradient(115deg,${TYPE_COLORS[top][0]},${TYPE_COLORS[top][1]},#f472b6,#facc15);background-size:250% 250%">${tied.length===1?(p.image?`<img class="result-character avatar-${top}" src="${p.image}" alt="${t.name}卡通角色">`:`<div class="result-mascot">${p.emoji}</div>`):`<div class="icon">🌈</div>`}<div>你的主要思考風格</div><h1>${tied.length>1?'混合型 AI 人格':t.name}</h1><h2>${tied.length>1?tied.map(k=>TYPES[k].name).join(' × '):t.title}</h2></div><div class="pad"><p class="desc">${tied.length>1?'你的最高分相近，表示你會按情境組合多種思考方式。':t.desc}</p>${tied.length===1?detailedProfile(top):mixedProfile(tied.slice(0,2))}${tied.length===1?`<div class="ai-profile"><div class="profile-box"><b>研究構念</b>${constructs[top]}</div><div class="profile-box"><b>人格表現</b>${p.personality}</div><div class="profile-box"><b>角色魅力</b>${p.charm}</div><div class="profile-box"><b>可能盲點</b>${p.weakness}</div></div><div class="info-grid"><div class="info"><b>核心長處</b>${t.strength}</div><div class="info"><b>成長方向</b>${t.growth}</div><div class="info"><b>互補拍檔</b>${t.partner}</div></div>`:''}<h2>標準化傾向分數</h2><p class="note" style="margin:0 0 14px">各類別按本次抽中的題數換算為0–100%，避免不同類別題數造成直接偏差。</p>${ranked.map(k=>`<div class="score-row"><div class="score-label"><span>${TYPES[k].icon} ${TYPES[k].name}</span><b>${s[k]}%</b></div><div class="track"><div class="fill" style="width:${s[k]}%"></div></div></div>`).join('')}<section class="research-notes"><h2>理論依據與限制</h2><p>本測驗以Big Five／BFI-2的開放性與盡責性、HEXACO六因素架構、Need for Cognition、Actively Open-Minded Thinking及Creative Personality研究作概念基礎。AI角色是教學隱喻，不等同正式心理診斷或原量表分數。</p><ol>${REFERENCES.map(r=>`<li>${r}</li>`).join('')}</ol></section><button class="btn alt" style="width:100%;margin-top:25px" onclick="resetQuiz()">↻ 重新抽取20題</button></div></div></section>`;
+}
+function start(){state={started:true,index:0,answers:{},done:false,questions:drawQuestions()};render();scrollTo(0,0)}
+function prev(){if(state.index>0){state.index--;render()}}
+function next(){const q=state.questions[state.index];if(state.answers[q.id]&&state.index<TEST_LENGTH-1){state.index++;render()}}
+function pick(v){const q=state.questions[state.index];state.answers[q.id]=v;render();if(state.index<TEST_LENGTH-1)setTimeout(()=>{state.index++;render()},170)}
+function finish(){if(Object.keys(state.answers).length===TEST_LENGTH){state.done=true;render();scrollTo(0,0)}}
+function resetQuiz(){state={started:false,index:0,answers:{},done:false,questions:[]};render();scrollTo(0,0)}
+render();
+</script></body></html>
